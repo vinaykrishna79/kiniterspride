@@ -1,0 +1,9 @@
+# *
+User-agent: *
+Allow: /
+
+# Host
+Host: https://www.knitterspride.com
+
+# Sitemaps
+Sitemap: https://www.knitterspride.com/sitemap.xml

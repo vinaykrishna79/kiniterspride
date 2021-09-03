@@ -1,0 +1,71 @@
+/* CSS Project == employee portal == start 17-012-2018 */
+
+
+/* body{ margin:0; padding:0; font-family: 'Roboto', sans-serif; font-size:15px; color:#3c3838;}
+
+.wrapper{ margin:0; padding:0; width:100%;}
+.container{ width: 1300px!important;} */
+
+
+
+
+
+/*--header CSS---*/
+.main-header { margin:0; padding:10px 0; background: #000;}
+.main-header p{color:#fff; text-align: center;}
+
+.blog-container{ margin:10px 0 ; padding:15px 0;}
+.blogbox{ margin:0 ; padding:0;}
+.blogbox .title-healine{ margin:0; padding:0 0 15px 0; font-size:20px; font-weight:500; color:#666666;}
+.blogbox .blog-col{ margin:0 0 40px 0; padding:10px 0; }
+.blogbox .blog-name{ margin:0; padding:0; font-size:30px; font-weight:400; color:#000000;}
+.blogbox .blog-name a{ text-decoration: none; color:#000000;}
+.blogbox .blog-name a:hover{ text-decoration: none; color:#d91b5c;}
+.blogbox .blog-name span{ margin:10px 0 0 0; padding:5px 0; font-size:14px; color:#666666; display:block; font-weight:300;}
+.blogbox p{ margin:0; padding:8px 0; font-size:16px;  color:#444444; line-height: 24px;}
+.blogbox p a{ color:#d91b5c;}
+.blogbox .btn-b { margin:20px 0; padding:8px 0;}
+.blogbox .btn-b a{ margin:10px 0; padding:10px 20px; font-size:16px;  color:#d91b5c; border: 1px solid #d91b5c; text-decoration: none;}
+.blogbox .btn-b a:hover{ background: #d91b5c; color: #fff;}
+.blogbox .blog-img{ margin:0; padding:20px 0; text-align:center;}
+.blogbox .blog-img img{ width: 100%; margin:0; padding:0; text-align:center;  }
+.blogbox .rowful{ margin: 10px 0;}
+.blogbox input.text{ margin: 0; padding: 10px; height: 45px; width: 100%; border: 1px solid #ccc;}
+.blogbox textarea.text{ margin: 0; padding: 10px; height: 150px;  width: 100%;  border: 1px solid #ccc;}
+.blogbox .btn-s { margin:20px 0; padding:8px 0;}
+.blogbox .btn-s a{ margin:10px 0; padding:10px 20px; font-size:16px;  background: #d91b5c; color:#ffff;  text-decoration: none;}
+.blogbox .btn-s a:hover{ background: #333; color: #fff;}
+
+
+
+.blog-side{ margin: 0 10px; }
+.sidebar-box{ margin:0 0 20px 0; padding:20px 30px;}
+.sidebar-box input{  margin: 0; height: 45px; }
+
+
+.sidebar-box .btn-b { margin:20px 0; padding:8px 0;}
+.sidebar-box .btn-b a{ margin:10px 0; padding:12px 20px; font-size:16px;  background: #d91b5c; color:#fff; text-decoration: none; }
+.sidebar-box .btn-b a:hover{ background: #d91b5c; color: #fff;}
+h3.sidebar-heading{ font-size:18px; color:#000000; text-transform: uppercase;}
+ul.categories{ margin: 0; padding: 0;}
+ul.categories li{ margin: 0; padding:5px 0;  font-size: 16px; color:#444444; list-style-type: none; line-height:26px;}
+ul.categories li a{ text-decoration: none;  color:#666666;}
+ul.categories li.post{ margin:12px 0; padding:15px 0;  border-bottom: 1px dashed #666;}
+ul.categories li a:hover{ color: #d91b5c;}
+
+
+
+
+.pagination ul {  padding: 0;  margin: 0; }
+.pagination ul li {    display: inline-block;    margin-bottom: 4px;    font-weight: 400; }
+.pagination ul li a, .pagination ul li span {      border: 1px solid #1eafed;      text-align: center;    color: #444;     display: inline-block;      width: 40px;      height: 40px;      line-height: 40px;      border-radius: 50%; }
+.pagination ul li.active a,  .pagination ul li.active span {      background: #1eafed;      color: #fff;      border: 1px solid transparent; }
+.pagination ul li a:hover {      background: #1eafed;      color: #fff; text-decoration: none;}
+.page-space li{margin-right:5px}
+.sans-font{font-family: sans-serif;}
+.font-14{font-size: 14px !important;}
+.foucs-out:focus{box-shadow: none;border-color: #ccc;}
+.font-w-700{font-weight: 700;}
+
+
+

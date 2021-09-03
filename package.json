@@ -1,0 +1,43 @@
+{
+  "name": "knitters_pride",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint",
+    "export": "next export",
+    "postbuild": "next-sitemap"
+  },
+  "dependencies": {
+    "axios": "^0.21.1",
+    "bootstrap": "^5.0.2",
+    "file-saver": "^2.0.5",
+    "fs": "^0.0.1-security",
+    "html-react-parser": "^1.2.7",
+    "jquery": "^3.6.0",
+    "moment": "^2.29.1",
+    "next": "11.0.1",
+    "next-compose-plugins": "^2.2.1",
+    "next-i18next": "^8.5.5",
+    "next-images": "^1.8.1",
+    "next-sitemap": "^1.6.164",
+    "node-sass": "^4.14.1",
+    "react": "17.0.2",
+    "react-bootstrap": "^1.6.1",
+    "react-contextmenu": "^2.14.0",
+    "react-dom": "17.0.2",
+    "react-html-parser": "^2.0.2",
+    "react-image-magnify": "^2.7.4",
+    "react-loading-skeleton": "^2.2.0",
+    "react-modal-video": "^1.2.8",
+    "react-owl-carousel": "^2.3.3",
+    "react-recaptcha": "^2.3.10",
+    "react-select": "^4.3.1"
+  },
+  "devDependencies": {
+    "eslint": "7.31.0",
+    "eslint-config-next": "11.0.1"
+  }
+}

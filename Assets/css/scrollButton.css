@@ -1,0 +1,29 @@
+.scrollButtonBox {
+    position: fixed;
+    right: 40px;
+    bottom: 40px;
+    z-index: 99999;
+    transition: opacity .3s ease;
+    opacity: 0.5;
+}
+
+.scrollButtonBox:hover {
+    opacity: 1;
+}
+
+.scrollButton {
+    cursor: pointer;
+    margin: 0 0.1rem;
+    font-size: 1rem;
+    padding: 1rem;
+    color: #d91b5c;
+    background: rgb(0,0,0, 0.1);
+    border-radius: 4px;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+    
+}
+
+.scrollButton:hover{
+    color: white;
+    background: rgb(217, 27, 92)
+}
