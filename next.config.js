@@ -1,5 +1,6 @@
 // const { i18n } = require('./next-i18next.config')
 // const webpack = require('webpack');
+require('dotenv').config()
 const withImages = require('next-images')
 module.exports = withImages({
   reactStrictMode: true,
@@ -26,6 +27,9 @@ module.exports = withImages({
                 "window.jQuery": "jquery"
             })
         );
+        config.plugins.push(
+          new webpack.EnvironmentPlugin(process.env)
+        )
         return config;
     },
     // images: {
@@ -80,10 +84,10 @@ module.exports = withImages({
         //   source: '/e/:brand',
         //   destination: '/404'
         // },
-        {
-          source: '/:locale(en||es)',
-          destination: '/'
-        },
+        // {
+        //   source: '/:locale(en||es)',
+        //   destination: '/'
+        // },
         {
           source: '/:slug/:locale(en||es)',
           destination: '/:slug'

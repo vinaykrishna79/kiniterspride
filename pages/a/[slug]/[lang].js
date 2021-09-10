@@ -3,6 +3,7 @@ import { withRouter } from 'next/router'
 import Ginger from "../../../component/Ginger";
 import { getAPI } from "../../../utils/api";
 import { Baseurl } from "../../../utils/BaseUrl";
+import MetaDecorator from "../../../utils/MetaDecorator";
 // import { withTranslation } from "react-i18next";
 // import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 
@@ -87,13 +88,22 @@ class ProductList extends React.Component {
     };
 
     render(){
-        // console.log(this.props);
+        const {seoFields} = this.props
         return(
             <>
+                <MetaDecorator
+                    title={seoFields?.seoTitle ? seoFields?.seoTitle : ""}
+                    description={seoFields?.seoDesc ? seoFields?.seoDesc : ""}
+                    keywords={seoFields?.seoKeywords ? seoFields?.seoKeywords : ""}
+                    ogTitle={seoFields?.ogFields?.ogTitle ? seoFields?.ogFields?.ogTitle : ""}
+                    ogDescription={seoFields?.ogFields?.ogDescription ? seoFields?.ogFields?.ogDescription : ""}
+                    ogImage={seoFields?.ogFields?.ogImage ? seoFields?.ogFields?.ogImage : ""}
+                />
                 <Ginger
                     {...this.state}
                     id="a"
                     connectHeaderGinger={this.connectHeaderGinger}
+                    seoFields={this.props.seoFields}
                 />
                 {/* <h1> Hello</h1> */}
             </>
@@ -149,10 +159,23 @@ export async function getStaticPaths() {
 //       }
 //   }
 
-export async function getStaticProps () {
+export async function getStaticProps({ params: {slug, lang} }) {
+    let res
+    if(slug.includes("-sets")){
+        res = await fetch(`${Baseurl}brand/brandProductTypes?bslug=${slug.replace("-sets","")}&cslug=${"sets"}&lang=${lang}`)
+    } else if(slug.includes("-crochet")){
+        res = await fetch(`${Baseurl}brand/brandProductTypes?bslug=${slug.replace("-crochet","")}&cslug=${"crochet"}&lang=${lang}`)
+    } else {
+        res = await fetch(`${Baseurl}brand/brandProductTypes?bslug=${slug}&cslug=${"needles"}&lang=${lang}`)
+    }
+    const data = await res.json();
+    const resData = data.data
+    const seoFields = resData?.seoFields
     return {
-        props: { },
+      props: {
+        seoFields: seoFields ? seoFields : null
       }
+    };
 }
   
 export default withRouter(ProductList)

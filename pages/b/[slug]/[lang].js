@@ -106,8 +106,17 @@ class ProductList extends React.Component {
     document.getElementById("navbarclose").click();
   };
   render() {
+    const {seoFields} = this.props
     return (
       <>
+        <MetaDecorator
+          title={seoFields?.seoTitle ? seoFields?.seoTitle : ""}
+          description={seoFields?.seoDesc ? seoFields?.seoDesc : ""}
+          keywords={seoFields?.seoKeywords ? seoFields?.seoKeywords : ""}
+          ogTitle={seoFields?.ogFields?.ogTitle ? seoFields?.ogFields?.ogTitle : ""}
+          ogDescription={seoFields?.ogFields?.ogDescription ? seoFields?.ogFields?.ogDescription : ""}
+          ogImage={seoFields?.ogFields?.ogImage ? seoFields?.ogFields?.ogImage : ""}
+        />
         <Ginger
           {...this.state}
           seoFields={this.props.seoFields}
@@ -160,7 +169,7 @@ export async function getStaticProps({ params: {slug, lang} }) {
   const seoFields = resData?.seoFields
   return {
     props: {
-      seoFields: seoFields
+      seoFields: seoFields ? seoFields : null
     }
   };
 }

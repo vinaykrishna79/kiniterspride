@@ -30,7 +30,7 @@ class Errorpage extends React.Component {
                             <p className="text-uppercase mob-text-center">
                                 {/* {t(`languages.ErrorPageText`)} */}ErrorPageText
                                 </p>
-                        <Image className="img-fluid" src={"/images/404.jpg"} alt="404 Error Page" />
+                        <Image className="img-fluid" src={"/images/404.jpg"} alt="404 Error Page" noSkeleton={true} />
                         <div className="btn-b error-btn my-3"><Link href="/">Go to home</Link></div>
                         </div>
                         <div className="text-center">
@@ -43,14 +43,5 @@ class Errorpage extends React.Component {
         )
     }
 }
-// export default withRouter(withTranslation()(Errorpage));
-
-// export async function getStaticProps ({ locale }) {
-//     return {
-//         props: {
-//           ...await serverSideTranslations(locale, ['common']),
-//         },
-//       }
-//   }
 
 export default withRouter(Errorpage)

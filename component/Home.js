@@ -21,6 +21,7 @@ import axios from "axios";
 import Link from "next/link";
 import { getCurrentLocaleFromUrl, imageNameToAltTag } from "../utils/helperFunctions";
 import LoadingSkeleton from "./LoadingSkeleton";
+import ScreenSizeDetector from 'screen-size-detector'
 
 class Home extends React.Component {
     state = {
@@ -57,6 +58,7 @@ class Home extends React.Component {
 
     componentDidMount() {
         this.getDataForTheComponent()
+        this.setState({screen: new ScreenSizeDetector()})
     }
 
     getDataForTheComponent = () => {
@@ -116,7 +118,7 @@ class Home extends React.Component {
                     this.getLanguages();
                     if (data.type === "0") {
                         this.setState({ promoBannerDetail: data }, () => {
-                            // this.props.setAppState({ initialModal: true })
+                            this.setState({ initialModal: true })
                         }
                             );
                     } else if (data.type === "1") {
@@ -144,7 +146,7 @@ class Home extends React.Component {
                         });
                     }
                 } else {
-                    // this.props.setAppState({ initialModal: false });
+                    this.setState({ initialModal: false });
                 }
             })
             .catch((err) => console.log(err));
@@ -241,11 +243,10 @@ class Home extends React.Component {
     };
 
     toggleModal = () => {
-        this.props.setAppState({ initialModal: !this.props.initialModal });
+        this.setState({ initialModal: !this.state.initialModal });
     };
 
     bestSellerFunc = (best) => {
-        console.log("Home props", this.props)
         if (best.brand) {
             this.props.router.push(`/d/${best.brand.slug}/${best.slug}/${this.state.language}`);
         } else if (best.productType) {
@@ -265,10 +266,18 @@ class Home extends React.Component {
                 console.log(error);
             });
     };
-
+    postInstaFeed = () => {
+        postAPI("template/instaposts")
+            .then((res) => {
+              console.log(res,'instapost')
+            })
+            .catch((error) => {
+                console.log(error);
+            });
+    };
     render() {
-        const { isLoading, templates, featureBanner2, /*featureBanner4,*/ featureBanner5, socialBanner, instaFeeds, promoBannerDetail } = this.state;
-        const { initialModal, t } = this.props;
+        const { isLoading, templates, featureBanner2, /*featureBanner4,*/ featureBanner5, socialBanner, instaFeeds, promoBannerDetail, initialModal, screen } = this.state;
+        // const { initialModal, t } = this.props;
         // console.log("allLanguage   ", this.props)
         // const { /*languages, langObj,*/  allLanguages } = this.state;
         // console.log(this.props);
@@ -362,7 +371,7 @@ class Home extends React.Component {
                                         data-wow-offset={300}
                                         style={{ visibility: "visible", animationName: "fadeInUp" }}
                                     >
-                                        {item.image ?  <Image src={item.image} alt={imageNameToAltTag(item.image)} height={650} width={650}/> : null}
+                                        {item.image ?  <Image src={item.image} alt={imageNameToAltTag(item.image)} height={screen.width>1199?420 : screen.width>991?332 : screen.width>767?245 : screen.width>678?277: 200} /> : null}
                                         <div className="caption kpbg-dark mob-text-left">
                                             <h3 className="text-white mob-font-18">{item.title}</h3>
                                             <p className="text-white ">{item.sub}</p>
@@ -400,7 +409,7 @@ class Home extends React.Component {
                         <section className="communitySection mt-5 wow fadeInUp" key={idx}>
                             <div className="container">
                                 <div className="inner">
-                                    { item.image ? <Image src={item.image} alt={imageNameToAltTag(item.image)} height={650} width={1500}/>  : "" }
+                                    { item.image ? <Image src={item.image} alt={imageNameToAltTag(item.image)} height={650} width={(screen.width)*0.84}/>  : "" }
                                     <div className="caption text-center">
                                         <div className="title mob-font-18">{item.title}</div>
                                         <p className="mob-font-14 mob-text-center">{item.sub}</p>
@@ -469,29 +478,30 @@ class Home extends React.Component {
                                     <div className="col-lg-6 col-xs-12">
                                         <div className="row">
                                             <div className="col-sm-4  mb-4 mb-lg-0">
-                                                <div className="w-100  rounded mb-4 height-200 m-h-auto">
-                                                <Image src={`${storageUrl}${instaFeeds[0]}`} className="w-100 h-100" alt={imageNameToAltTag(storageUrl + instaFeeds[0])} />
-                                                </div>
-                                                <div className="w-100 shadow-1-strong rounded height-200 m-h-auto">
-                                                <Image src={storageUrl+instaFeeds[1]} className="w-100 h-100" alt={imageNameToAltTag(storageUrl + instaFeeds[1])} />
-                                                </div>
+                                                {/* <div className="w-100 rounded mb-4 height-200 m-h-auto"> */}
+                                                <Image src={`${storageUrl}${instaFeeds[0]}`} className="w-100 rounded mb-4 height-200 m-h-auto" alt={imageNameToAltTag(storageUrl + instaFeeds[0])} />
+                                                {/* </div> */}
+                                                {/* <div className="w-100 shadow-1-strong rounded height-200 m-h-auto"> */}
+                                                <Image src={storageUrl+instaFeeds[1]} className="w-100 shadow-1-strong rounded height-200 m-h-auto" alt={imageNameToAltTag(storageUrl + instaFeeds[1])} />
+                                                {/* </div> */}
                                             </div>
                                             <div className="col-sm-4  mb-4 mb-lg-0">
-                                                <div className="w-100 shadow-1-strong rounded mb-4 h-300 m-h-auto">
-                                                    <Image src={storageUrl+instaFeeds[2]} className="w-100 h-100" className="w-100 shadow-1-strong rounded mb-4 h-300 m-h-auto" alt={imageNameToAltTag(storageUrl + instaFeeds[2])} />
-                                                </div>
-                                                <div className="w-100 shadow-1-strong rounded height-100 m-h-auto">
-                                                <Image src={storageUrl+instaFeeds[3]} className="w-100 h-100" alt={imageNameToAltTag(storageUrl + instaFeeds[3])} />
-                                                </div>
+                                                {/* <div className="w-100 shadow-1-strong rounded mb-4 h-300 m-h-auto"> */}
+                                                    <Image src={storageUrl+instaFeeds[2]} className="w-100 shadow-1-strong rounded mb-4 h-300 m-h-auto" className="w-100 shadow-1-strong rounded mb-4 h-300 m-h-auto" alt={imageNameToAltTag(storageUrl + instaFeeds[2])} />
+                                                {/* </div> */}
+                                                {/* <div className="w-100 shadow-1-strong rounded height-100 m-h-auto"> */}
+                                                <Image src={storageUrl+instaFeeds[3]} className="w-100 shadow-1-strong rounded height-100 m-h-auto" alt={imageNameToAltTag(storageUrl + instaFeeds[3])} />
+                                                {/* </div> */}
                                             </div>
                                             <div className="col-sm-4  mb-4 mb-lg-0">
-                                                <div className="w-100 shadow-1-strong rounded mb-4 height-100 m-h-auto">
-                                                <Image src={storageUrl+instaFeeds[4]} className="w-100 h-100" alt={imageNameToAltTag(storageUrl + instaFeeds[4])} />
-                                                </div>
-                                                <div className="w-100 shadow-1-strong rounded h-300 m-h-auto">
-                                                <Image src={storageUrl+instaFeeds[5]} className="w-100 h-100" alt={imageNameToAltTag(storageUrl + instaFeeds[5])} />
-                                                </div>
+                                                {/* <div className="w-100 shadow-1-strong rounded mb-4 height-100 m-h-auto"> */}
+                                                <Image src={storageUrl+instaFeeds[4]} className="w-100 shadow-1-strong rounded mb-4 height-100 m-h-auto" alt={imageNameToAltTag(storageUrl + instaFeeds[4])} />
+                                                {/* </div> */}
+                                                {/* <div className="w-100 shadow-1-strong rounded h-300 m-h-auto"> */}
+                                                <Image src={storageUrl+instaFeeds[5]} className="w-100 shadow-1-strong rounded h-300 m-h-auto" alt={imageNameToAltTag(storageUrl + instaFeeds[5])} />
+                                                {/* </div> */}
                                             </div>
+                                            <button onClick={()=>this.postInstaFeed()} hidden>Refetch insta</button>
                                         </div>
                                     </div>
                                 </div>

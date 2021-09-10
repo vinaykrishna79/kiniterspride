@@ -810,7 +810,7 @@ const card_center_msg =  {
 
     return (
       <React.Fragment>
-        <MetaDecorator
+        {/* <MetaDecorator
           title={productDetails?.seoTitle ? productDetails?.seoTitle : ""}
           description={
             productDetails?.seoMetadesc ? productDetails?.seoMetadesc : ""
@@ -826,8 +826,7 @@ const card_center_msg =  {
           ogTitle={productDetails?.ogFields?.ogTitle ? productDetails?.ogFields?.ogTitle : "..."}
           ogDescription={productDetails?.ogFields?.ogDescription ? productDetails?.ogFields?.ogDescription : "..."}
           ogImage={productDetails?.ogFields?.ogImage ? productDetails?.ogFields?.ogImage : "..."}
-          ogUrl={productDetails?.ogFields?.ogUrl ? productDetails?.ogFields?.ogUrl : "..."}
-        />
+        /> */}
         <div className="sm_modile_alert" style={card_center_msg}>
 
         {
@@ -1485,7 +1484,7 @@ const card_center_msg =  {
                     </span>
                   ) : null} */}
                   <Recaptcha
-                    sitekey={'6Ldhne0aAAAAAI8wvoj3L3d2Byg_CzqOBqQimewT'}
+                    sitekey={process.env.React_App_site_key}
                     render="explicit"
                     onloadCallback={this.captchaLoad}
                     verifyCallback={this.verify}

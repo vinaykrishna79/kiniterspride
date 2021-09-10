@@ -187,7 +187,6 @@ class Resourcesinner extends React.Component {
     };
 
     filterbyProductType = (productType) => {
-        console.log(productType,'productType')
         if(!productType) return
         const filtered = this.state.assets.filter(item => item.productType === productType)
         this.setState({
@@ -271,7 +270,7 @@ class Resourcesinner extends React.Component {
                                         
                                         <div className="col-12 col-md-6 text-right imageselect">
                                             <button onClick={this.downloadZIP} disabled={isAllDownloading}>
-                                            {resourcesInnerLangObj.languages["DOWNLOAD ALL"]}  <Image src={"/images/downloadi.png"} />
+                                            {resourcesInnerLangObj.languages["DOWNLOAD ALL"]}  <Image src={"/images/downloadi.png"} alt="..."/>
                                             {/* {resourcesInnerLangObj(`languages.DOWNLOAD ALL`)} */}
                                             </button>
                                             {this.state.isAllDownloading && <div className="mt-3 d-flex flex-row-reverse"> Your request is registered, it will download soon, Please Wait... </div>}
@@ -283,7 +282,7 @@ class Resourcesinner extends React.Component {
                                         <>
                                             <div className="col-12 col-md-12 text-right imageselect">
                                                 <button onClick={this.downloadZIP} disabled={isAllDownloading}>
-                                                {resourcesInnerLangObj.languages["DOWNLOAD ALL"]} <Image src={"/images/downloadi.png"} />
+                                                {resourcesInnerLangObj.languages["DOWNLOAD ALL"]} <Image src={"/images/downloadi.png"} alt="..."/>
                                                 </button>
                                                 {this.state.isAllDownloading && <div className="mt-3 d-flex flex-row-reverse"> Your request is registered, it will download soon, Please Wait... </div>}
                                             </div>

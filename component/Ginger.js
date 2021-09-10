@@ -4,14 +4,14 @@ import { withRouter } from "next/router";
 import { getAPI } from "../utils/api";
 import Skeleton from "react-loading-skeleton";
 // import ReactHtmlParser from "react-html-parser";
-import parse from "html-react-parser";
-import MetaDecorator from "../utils/MetaDecorator";
+import parse from "html-react-parser"; 
 import { storageUrl } from "../utils/BaseUrl";
 // import { withTranslation } from "react-i18next";
 import Image from "./custom-image";
 import Link from "next/link";
 import { getCurrentLocaleFromUrl, imageNameToAltTag } from "../utils/helperFunctions";
 import LoadingSkeleton from "./LoadingSkeleton";
+import ScreenSizeDetector from 'screen-size-detector'
 
 class Ginger extends Component {
     state = {
@@ -25,6 +25,7 @@ class Ginger extends Component {
         langObj: {},
         lang_i: "",
         loading: false,
+        screen: ""
     };
 
     // componentDidUpdate(prevProps) {
@@ -46,6 +47,7 @@ class Ginger extends Component {
 
     componentDidMount() {
         this.getDataForTheComponent()
+        this.setState({screen: new ScreenSizeDetector()})
     }
 
     componentDidUpdate(prevProps, prevState) {
@@ -58,11 +60,9 @@ class Ginger extends Component {
         this.setState({loading: true})
         let ids = this.props.router.query;
         // let { language } = this.props.i18n
-        console.log("Ginger ids1 ---", ids)   
         const r = this.props.router;
         ids.lang = getCurrentLocaleFromUrl(r.asPath, r.locales, r.defaultLocale);
-        ids.pagetype = this.props.id
-        console.log("Ginger ids ---", ids)   
+        ids.pagetype = this.props.id 
         this.setState({ ids: ids }, () => {
             let { ids } = this.state;
             if (ids.pagetype === "a") {
@@ -173,7 +173,6 @@ class Ginger extends Component {
 
     render() {
         let { brands, types, materials, isLoader, t, seoFields } = this.props;
-        console.log("brands", brands, seoFields)
         // if (brands?.seoFields) {
         //     seoFields = brands.seoFields;
         // } else if (types?.seoFields) {
@@ -181,13 +180,13 @@ class Ginger extends Component {
         // } else if (materials?.seoFields) {
         //     seoFields = materials.seoFields;
         // }
-        let { splitCategObj } = this.state;
+        let { splitCategObj, screen } = this.state;
         const r = this.props.router;
         let language = getCurrentLocaleFromUrl(r.asPath, r.locales, r.defaultLocale);
         const gingerLangObj = require(`../public/locales/${language}/common.json`)
         return (
             <React.Fragment>
-                <MetaDecorator
+                {/* <MetaDecorator
                     title={seoFields?.seoTitle ? seoFields?.seoTitle : ""}
                     description={seoFields?.seoDesc ? seoFields?.seoDesc : ""}
                     keywords={seoFields?.seoKeywords ? seoFields?.seoKeywords : ""}
@@ -195,7 +194,7 @@ class Ginger extends Component {
                     ogDescription={seoFields?.ogFields?.ogDescription ? seoFields?.ogFields?.ogDescription : ""}
                     ogImage={seoFields?.ogFields?.ogImage ? seoFields?.ogFields?.ogImage : ""}
                     ogUrl={seoFields?.ogFields?.ogUrl ? seoFields?.ogFields?.ogUrl : ""}
-                />
+                /> */}
                 <div className="ginger-container">
                     {isLoader ? (
                         <LoadingSkeleton />
@@ -204,15 +203,15 @@ class Ginger extends Component {
                     // {
                     brands?.coverImage ? (
                         <section className="inner-banner kp-mid_banner">
-                            <Image src={storageUrl + brands?.coverImage} className="img-fluid" alt={imageNameToAltTag(storageUrl + brands?.coverImage)} height={600} width={1800}/>
+                            <Image src={storageUrl + brands?.coverImage} className="img-fluid" alt={imageNameToAltTag(storageUrl + brands?.coverImage)} height={(screen.width)/2.85} width={screen.width}/>
                         </section>
                     ) : types?.thumbNailImage ? (
                         <section className="inner-banner kp-mid_banner">
-                            <Image src={storageUrl + types?.thumbNailImage} className="img-fluid" alt={imageNameToAltTag(storageUrl + types?.thumbNailImage)} height={600} width={1800}/>
+                            <Image src={storageUrl + types?.thumbNailImage} className="img-fluid" alt={imageNameToAltTag(storageUrl + types?.thumbNailImage)} height={(screen.width)/2.85} width={screen.width}/>
                         </section>
                     ) : materials?.coverImage ? (
                         <section className="inner-banner kp-mid_banner">
-                            <Image src={storageUrl + materials?.coverImage} className="img-fluid" alt={imageNameToAltTag(storageUrl + materials?.coverImage)} height={600} width={1800}/>
+                            <Image src={storageUrl + materials?.coverImage} className="img-fluid" alt={imageNameToAltTag(storageUrl + materials?.coverImage)} height={(screen.width)/2.85} width={screen.width}/>
                         </section>
                     ) : null}
 
@@ -247,7 +246,7 @@ class Ginger extends Component {
 
                                                                 passHref={true}
                                                             >
-                                                                <>
+                                                                <a>
                                                                 <figure className="swap-on-hover">
                                                                     <Image
                                                                         className="swap-on-hover__front-image height-340"
@@ -273,7 +272,7 @@ class Ginger extends Component {
                                                                         {gingerLangObj.languages.View_Details}
                                                                     </Link>
                                                                 </div>
-                                                                </>
+                                                                </a>
                                                             </Link>
                                                         </div>
 
@@ -316,7 +315,7 @@ class Ginger extends Component {
                                 </div>
                                 <div className="row">
                                     <div className="col-md-12 productBox productlist">
-                                        <p className="wow fadeInUp" dangerouslySetInnerHTML={{ __html: brands.desc }}/>
+                                        <p className="wow fadeInUp" dangerouslySetInnerHTML={{ __html: types.desc }}/>
                                             {/* {ReactHtmlParser(types.desc)}</p> */}
                                         {parse(types.header ? types.header : "")?.props?.children?.type === "br" || types.header === "" ? null : (
                                             <div className="text-center mb-md-5 padddingtop">
@@ -330,46 +329,46 @@ class Ginger extends Component {
                                                 {types?.brands
                                                     ? types?.brands?.map((producttype, index) => (
                                                           <div className="productColumn wow fadeInUp text-center" key={index}>
-                                                              <div className="wrap">
-                                                                  <div className="logowrap">
-                                                                      <Image src={storageUrl + producttype.icon} alt={imageNameToAltTag(storageUrl + producttype.icon)} height={500} width={500}/>
-                                                                  </div>
-                                                                  <Link
-                                                                      href={{
-                                                                          pathname: `/d/${producttype.slug}/${producttype.pslug}`,
-                                                                      }}
-                                                                      as={`/d/${producttype.slug}/${producttype.pslug}/${language}`}
-                                                                      passHref={true}
-                                                                  >
-                                                                      <>
-                                                                      <figure className="swap-on-hover">
-                                                                          <Image
-                                                                              className="swap-on-hover__front-image height-340"
-                                                                              src={this.imageOnly(producttype)[1]}
-                                                                              alt={imageNameToAltTag(this.imageOnly(producttype)[1])}
-                                                                              height={500} width={500}
-                                                                          />
-                                                                          <Image
-                                                                              className="swap-on-hover__back-image height-340"
-                                                                              src={this.imageOnly(producttype)[0]}
-                                                                              alt={imageNameToAltTag(this.imageOnly(producttype)[0])}
-                                                                              height={500} width={500}
-                                                                          />
-                                                                      </figure>
-                                                                      <div className="caption">
-                                                                          <Link
-                                                                              href={{
-                                                                                  pathname: `/d/${producttype.slug}/${producttype.pslug}`,
-                                                                              }}
-                                                                              as={`/d/${producttype.slug}/${producttype.pslug}/${language}`}
-                                                                          >
-                                                                              {/* {t("languages.View_Details")} */}
-                                                                              {gingerLangObj.languages.View_Details}
-                                                                          </Link>
-                                                                      </div>
-                                                                      </>
-                                                                  </Link>
-                                                              </div>
+                                                            <Link
+                                                                    href={{
+                                                                        pathname: `/d/${producttype.slug}/${producttype.pslug}`,
+                                                                    }}
+                                                                    as={`/d/${producttype.slug}/${producttype.pslug}/${language}`}
+                                                                    passHref={true}
+                                                                >
+                                                            <a>
+                                                                <div className="wrap">
+                                                                    <div className="logowrap">
+                                                                        <Image src={storageUrl + producttype.icon} alt={imageNameToAltTag(storageUrl + producttype.icon)} height={500} width={500}/>
+                                                                    </div>
+                                                                    <figure className="swap-on-hover">
+                                                                        <Image
+                                                                            className="swap-on-hover__front-image height-340"
+                                                                            src={this.imageOnly(producttype)[1]}
+                                                                            alt={imageNameToAltTag(this.imageOnly(producttype)[1])}
+                                                                            height={500} width={500}
+                                                                        />
+                                                                        <Image
+                                                                            className="swap-on-hover__back-image height-340"
+                                                                            src={this.imageOnly(producttype)[0]}
+                                                                            alt={imageNameToAltTag(this.imageOnly(producttype)[0])}
+                                                                            height={500} width={500}
+                                                                        />
+                                                                    </figure>
+                                                                    <div className="caption">
+                                                                        <Link
+                                                                            href={{
+                                                                                pathname: `/d/${producttype.slug}/${producttype.pslug}`,
+                                                                            }}
+                                                                            as={`/d/${producttype.slug}/${producttype.pslug}/${language}`}
+                                                                        >
+                                                                            {/* {t("languages.View_Details")} */}
+                                                                            {gingerLangObj.languages.View_Details}
+                                                                        </Link>
+                                                                    </div>  
+                                                                </div>
+                                                            </a>
+                                                            </Link>
                                                               {/* <p>
                                                                             <Link
                                                                                 to={{
@@ -381,20 +380,21 @@ class Ginger extends Component {
                                                       ))
                                                     : types?.products?.map((producttype, index) => (
                                                           <div className="productColumn wow fadeInUp text-center" key={index}>
-                                                              <div className="wrap">
+                                                              <Link
+                                                                    href={{
+                                                                        pathname: `/e/${types.slug}/${producttype.pslug}`,
+                                                                    }}
+                                                                    as={`/e/${types.slug}/${producttype.pslug}/${language}`}
+                                                                    passHref={true}
+                                                                >
+                                                                <a>
+                                                                <div className="wrap">
                                                                   {producttype?.icon?.length > 0 ? (
                                                                       <div className="logowrap">
                                                                           <Image src={storageUrl + producttype.icon} alt={imageNameToAltTag(storageUrl + producttype.icon)} height={500} width={500}/>
                                                                       </div>
                                                                   ) : null}
-                                                                  <Link
-                                                                      href={{
-                                                                          pathname: `/e/${types.slug}/${producttype.pslug}`,
-                                                                      }}
-                                                                      as={`/e/${types.slug}/${producttype.pslug}/${language}`}
-                                                                      passHref={true}
-                                                                  >
-                                                                      <>
+                                                                  
                                                                       <figure className="swap-on-hover">
                                                                           <Image
                                                                               className="swap-on-hover__front-image height-340"
@@ -420,10 +420,9 @@ class Ginger extends Component {
                                                                               {gingerLangObj.languages.View_Details}
                                                                           </Link>
                                                                       </div>
-                                                                      </>
-                                                                  </Link>
                                                               </div>
-
+                                                                </a>
+                                                                </Link>
                                                               <p>
                                                                   <Link
                                                                       href={{
@@ -466,6 +465,15 @@ class Ginger extends Component {
                                             <div className="gridCol gridflex_box">
                                                 {materials?.brands?.map((productmaterial, index) => (
                                                     <div className="productColumn wow fadeInUp text-center" key={index}>
+                                                        <Link
+                                                                href={splitCategObj.categ === "needles" ? {
+                                                                    pathname: `/a/${productmaterial.slug}/${language}`,
+                                                                } : {
+                                                                    pathname: `/a/${productmaterial.slug}-${splitCategObj.categ}/${language}`,
+                                                                }}
+                                                                passHref={true}
+                                                            >
+                                                                <a>
                                                         <div className="wrap">
                                                             <div className="logowrap">
                                                                 <Image src={storageUrl + productmaterial.icon} alt={imageNameToAltTag(storageUrl + productmaterial.icon)} height={500} width={500}/>
@@ -478,7 +486,7 @@ class Ginger extends Component {
                                                                 }}
                                                                 passHref={true}
                                                             >
-                                                                <>
+                                                                <a>
                                                                 <figure className="swap-on-hover">
                                                                     <Image
                                                                         className="swap-on-hover__front-image height-340"
@@ -511,9 +519,11 @@ class Ginger extends Component {
                                                                         </Link>
                                                                     </p>
                                                                 </div>
-                                                                </>
+                                                                </a>
                                                             </Link>
                                                         </div>
+                                                    </a>
+                                                            </Link>
                                                         {/* <p>
                                                                             <Link to={{
                                                                                 pathname: `/a/${productmaterial.slug}-${splitCategObj.categ}/${language}`

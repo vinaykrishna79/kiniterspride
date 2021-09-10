@@ -73,15 +73,25 @@ class SingleBlogPage extends Component {
 
   render() {
     const { blogPost, isLoad, langObj } = this.state;
+    const { ogFields } = this.props
     return (
       <React.Fragment>
+        <MetaDecorator
+          title={ogFields?.title ? ogFields?.title : ""}
+          description={ogFields?.desc ? ogFields?.desc : ""}
+          keywords={ogFields?.seoKeywords ? ogFields?.seoKeywords : ""}
+          ogTitle={ogFields?.ogTitle ? ogFields?.ogTitle : ""}
+          ogDescription={ogFields?.ogDescription ? ogFields?.ogDescription : ""}
+          ogImage={ogFields?.ogImage ? ogFields?.ogImage : ""}
+          ogUrl={ogFields?.ogUrl ? ogFields?.ogUrl : ""}
+      />
         {
           isLoad
             ?
             <LoadingSkeleton />
             :
             <>
-              {blogPost.title ? (
+              {/* {blogPost.title ? (
                 <MetaDecorator
                   title={blogPost.title}
                   description={blogPost.desc}
@@ -90,7 +100,7 @@ class SingleBlogPage extends Component {
                   ogDescription={blogPost.desc}
                   ogImage={storageUrl + blogPost.image}
                 />
-              ) : null}
+              ) : null} */}
               <div className="main-container">
                 <div className="blog-container">
                   <div className="container">
@@ -130,8 +140,7 @@ class SingleBlogPage extends Component {
                                 <Image
                                   src={storageUrl + blogPost.image}
                                   alt={imageNameToAltTag(storageUrl + blogPost.image)}
-                                  height={1000}
-                                  width={1500}
+                                  height={400}
                                 />
                               </a>
                             </div>
@@ -206,20 +215,22 @@ export async function getStaticPaths() {
   // };
 }
 
-// export async function getStaticProps({ locale }) {
-//   return {
-//     props: {
-//       ...(await serverSideTranslations(locale, ["common"])),
-//     },
-//   };
-// }
-
-// export default withRouter(withTranslation()(SingleBlogPage));
-
-export async function getStaticProps() {
+export async function getStaticProps({params: {slug, lang} }) {
+  const res = await fetch(`${Baseurl}blog/blog?bslug=${slug}`)
+  const data = await res.json();
+  const resData = data.data
+  const ogFields = {
+    ...resData.ogFields,
+    title: resData.title,
+    desc: resData.desc
+  }
   return {
-    props: {},
+    props: {
+      ogFields: ogFields
+    }
   };
 }
+
+// export default withRouter(withTranslation()(SingleBlogPage));
 
 export default withRouter(SingleBlogPage)

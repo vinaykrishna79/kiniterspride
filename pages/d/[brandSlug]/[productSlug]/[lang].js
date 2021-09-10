@@ -3,6 +3,8 @@ import { withRouter } from "next/router";
 import ProductDetails from "../../../../component/ProductDetails";
 import { getAPI } from "../../../../utils/api";
 import { Baseurl } from "../../../../utils/BaseUrl";
+import Head from "next/head";
+import MetaDecorator from "../../../../utils/MetaDecorator";
 // import { withTranslation } from "react-i18next";
 // import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 
@@ -32,8 +34,18 @@ class ProductDetail extends React.Component {
   }
 
   render() {
+    const {seoFields} = this.props
+    const {router: {asPath}} = this.props
     return (
       <>
+        <MetaDecorator
+          title={seoFields?.seoTitle ? seoFields?.seoTitle : ""}
+          description={ seoFields?.seoMetadesc ? seoFields?.seoMetadesc : "" }
+          keywords={ seoFields?.seoMetaKeyword ? seoFields?.seoMetaKeyword : ""  }
+          ogTitle={seoFields?.ogFields?.ogTitle ? seoFields?.ogFields?.ogTitle : "..."}
+          ogDescription={seoFields?.ogFields?.ogDescription ? seoFields?.ogFields?.ogDescription : "..."}
+          ogImage={seoFields?.ogFields?.ogImage ? seoFields?.ogFields?.ogImage : "..."}
+        />
         <ProductDetails />
       </>
     );
@@ -86,9 +98,20 @@ export async function getStaticPaths() {
 
 // export default withTranslation()(withRouter(ProductDetail));
 
-export async function getStaticProps() {
+export async function getStaticProps({ params: {brandSlug, productSlug, lang} }) {
+  const res= await fetch(`${Baseurl}product/byBrandAndType?bslug=${brandSlug}&pslug=${productSlug}&lang=${lang}`)
+  const data = await res.json();
+  const product = data.products?.[0]
+  const seoFields = {
+    seoTitle: product?.seoTitle ? product?.seoTitle : "",
+    seoMetaKeyword: product?.seoMetaKeyword ? product?.seoMetaKeyword : "",
+    seoMetadesc: product?.seoMetadesc ? product?.seoMetadesc : "",
+    ogFields: product?.ogFields ? product?.ogFields : null
+  }
   return {
-    props: { },
+    props: {
+      seoFields: seoFields
+    }
   };
 }
 

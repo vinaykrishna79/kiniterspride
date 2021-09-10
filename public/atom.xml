@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+    <id>https://www.knitterspride.com/blog/</id>
+    <title>Knitter's Pride</title>
+    <updated>2021-09-06T07:34:39.401Z</updated>
+    <generator>https://github.com/jpmonette/feed</generator>
+    <link rel="alternate" href="https://www.knitterspride.com/blog/"/>
+    <subtitle>Knitter's Pride RSS Feed</subtitle>
+    <rights>© Knitter's Pride</rights>
+</feed>

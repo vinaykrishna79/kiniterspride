@@ -28,6 +28,7 @@ module.exports = {
   siteUrl: 'https://www.knitterspride.com',
   generateRobotsTxt: true,
   sitemapSize: 20000,
+  exclude: staticPaths,
   additionalPaths: async (config) => {
     const result = []
     for (let path in staticPaths) {

@@ -541,16 +541,16 @@ class Header extends Component {
                                 <div className="col-3 padding-0">
                                     <Link href="/" >
                                         <span className="navbar-brand header-logo" style={{"cursor": "pointer"}}>
-                                            <Image src={"/images/Knitters_Pride_Logo.png"} alt="Knitter's Pride" height={42} width={120}/>
+                                            <Image src={"/images/Knitters_Pride_Logo.png"} alt="Knitter's Pride" noSkeleton={true} />
                                         </span>
                                     </Link>
                                 </div>
                                 <div className="col-7 text-right">
                                     <div className="rightPortion">
                                         <form className="form-inline my-2 my-lg-0">
-                                            {/* <a href="#search2" className="search" id="search1">
+                                            <span className="search" id="search1">
                                                 <i className="fa fa-search" aria-hidden="true" />
-                                            </a> */}
+                                            </span>
                                         </form>
                                         {/* <a href="#" className="mr-2">
                                             <Image src={"/images/storicon.png")} alt="..."/>
@@ -572,7 +572,7 @@ class Header extends Component {
                         <nav className="navbar navbar-expand-lg navbar-light">
                             <Link href="/" >
                                 <span className="navbar-brand header-logo" style={{"cursor": "pointer"}}>
-                                    <Image src={"/images/Knitters_Pride_Logo.png"} alt="Knitter's Pride" height={42} width={120}/>
+                                    <Image src={"/images/Knitters_Pride_Logo.png"} alt="Knitter's Pride" height={42} width={120} noSkeleton={true} />
                                 </span>
                             </Link>
                             <button
@@ -817,12 +817,12 @@ class Header extends Component {
                                                             {headerLangObj.languages.aboutus}
                                                             </Link>
                                                     </li>
-                                                    <li><Link 
+                                                    {/* <li><Link 
                                                     // to="/blog"
                                                     href={`/blog`}
                                                     as={`/blog/${language}`}
                                                     >
-                                                        Blog</Link></li> 
+                                                        Blog</Link></li>  */}
                                                     <li>
                                                         <Link 
                                                         // to={`/social-contribution/${this.props.language}`}
@@ -995,7 +995,7 @@ class Header extends Component {
                                             </div>
                                             <div className="col-sm-12 col-md-12 text-center">
                                                 {/* <div className="modal-logo" style={{textAlign:'center', width:'100%'}}> */}
-                                                <Image src={"/images/Knitters_Pride_Logo.png"} alt="Knitter's Pride" className="modal-logo"/>
+                                                <Image src={"/images/Knitters_Pride_Logo.png"} alt="Knitter's Pride" className="modal-logo" noSkeleton={true} />
                                                 {/* </div> */}
                                                 <div className="upper-section text-center ">
                                                     <div className="text-title">
@@ -1009,8 +1009,9 @@ class Header extends Component {
 
                                             <div className="box_row mt-5">
                                                 {this.state.allLanguage.map((item, idx) => (
-                                                    // <Link href="/" locale={item.shortName} key={idx} passHref>
-                                                    <Link href={`/${item.shortName}`} key={idx} passHref={true}>
+                                                    <React.Fragment>
+                                                     {/* <Link href="/" locale={item.shortName} key={idx} passHref> */}
+                                                    {item.shortName === "en" ? <Link href={`/${item.shortName}`} key={idx} passHref={true}>
                                                         <div className="inner_box" 
                                                         // onClick={() => i18n.changeLanguage(item.shortName)}
                                                         // onClick={() => this.changeLang(item.shortName)}
@@ -1025,7 +1026,8 @@ class Header extends Component {
                                                                 
                                                             </div>
                                                         </div>
-                                                    </Link>
+                                                    </Link> : null}
+                                                    </React.Fragment>
                                                 ))}
                                                 <div className="blok-title d-none" id="mo" data-dismiss="modal"></div>
                                             </div>

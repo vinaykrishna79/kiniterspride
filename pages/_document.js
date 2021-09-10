@@ -42,14 +42,6 @@ const CustomScripts=()=>{
                   <meta name="expires" content="never">
                   <meta name="language" content="english">
                   <!-- Global site tag (gtag.js) - Google Analytics -->
-                  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-24920181-1"></script>
-                  <script>
-                    window.dataLayer = window.dataLayer || [];
-                    function gtag(){dataLayer.push(arguments);}
-                    gtag('js', new Date());
-
-                    gtag('config', 'UA-24920181-1');
-                  </script>                  
                   
                 
                   <link rel="manifest" href="favicon/manifest.json" />
@@ -60,7 +52,7 @@ const CustomScripts=()=>{
                 
                   <meta name="theme-color" content="#ffffff" />`+
                   '<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />'+
-                  '<link rel="stylesheet" href="https://knitpro-prod.s3.amazonaws.com/testImage/homeCss.css" />'+
+                  '<link rel="stylesheet" href="https://knitterspride-prod.s3.amazonaws.com/testImage/homeCss.css" />'+
                   '<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>'+
                   '<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>'+
                   '<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>'+
@@ -70,17 +62,7 @@ const CustomScripts=()=>{
                   '<script src="https://knitpro-prod.s3.amazonaws.com/testImage/homeJs.js"></script>'+
                   '<script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/1.3.8/FileSaver.js"></script>'+
                   `<script src="https://www.google.com/recaptcha/api.js?onload=onloadCallback&render=explicit" async defer></script>
-                  <meta name="google-site-verification" content="SU9yz4VCCpkk1Ve7xrpzzBbQC2F8T6NLYZ6zr67RbVw" />
-                  <script type="text/javascript" language="javascript">
-                  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-                  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-                  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-                  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-                
-                  ga('create', 'UA-54932868-1', 'auto');
-                  ga('require', 'displayfeatures');
-                  ga('send', 'pageview');
-                </script>
+                  <meta name="google-site-verification" content="XeIeHd7_y1mcgXEPseq8T9MmcPMZWBlWUbgJkGvpMAA" />
                 <script type="text/javascript">
                   var isMegaMenuLoaded = false;
                   $(document).ready(function () {

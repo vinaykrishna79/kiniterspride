@@ -20,7 +20,7 @@ class Blog extends Component {
     state = {
         allBlogs: [],
         count: 0,
-        isLoad: false,
+        isLoad: true,
         allCateg: [],
         allArchive: [],
         categId: "",
@@ -244,7 +244,7 @@ class Blog extends Component {
                                         <div className="row">
                                             <div className="col-sm-12 col-md-8">
                                                 <div className="blogbox">
-                                                    {isLoad ? (
+                                                    {/* {isLoad ? (
                                                         <>
                                                             <div style={{ paddingBottom: "100px" }}>
                                                                 <div style={{ paddingBottom: "20px" }}>
@@ -269,7 +269,7 @@ class Blog extends Component {
                                                                 </div>
                                                             </div>
                                                         </>
-                                                    ) : null}
+                                                    ) : null} */}
                                                     {allBlogs.length > 0 &&
                                                         allBlogs.map((ele, index) => (
                                                             <div className="blog-col" key={index}>
@@ -291,7 +291,7 @@ class Blog extends Component {
                                                                     }}
                                                                         as={`/blog/${ele.slug}/${lang_i}`}
                                                                         passHref={true}>
-                                                                        <Image src={storageUrl + ele.image} alt={imageNameToAltTag(storageUrl + ele.image)} height={500} width={800} />
+                                                                        <a><Image src={storageUrl + ele.image} alt={imageNameToAltTag(storageUrl + ele.image)} height={screen.width>1199?455 : screen.width>991?453 : screen.width>767?690 : screen.width>678?510: 100}/></a>
                                                                     </Link>
                                                                 </div>
                                                                 <div dangerouslySetInnerHTML={{ __html: `<p>${ele.desc}</p>` }} />

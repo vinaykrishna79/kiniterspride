@@ -7,9 +7,11 @@ import { useRouter } from "next/router";
 const OwlCarousel = dynamic(import("react-owl-carousel"), {ssr: false});
 import { getCurrentLocaleFromUrl, imageNameToAltTag } from "../utils/helperFunctions";
 import Image from "./custom-image";
+import ScreenSizeDetector from 'screen-size-detector'
 
 function TopCarosel(props) {
     const router = useRouter()
+    const screen = new ScreenSizeDetector()
     const topBannerList = props.templates.filter((value) => value.type === "top_banner");
     // const [responsive, setResponsive] = useState({
     //     0: {
@@ -58,7 +60,7 @@ function TopCarosel(props) {
                             style={item.buttonLink.trim().length === 0 ? {} : { cursor: "pointer" }}
                         >
                             {/* {console.log("Item", item)} */}
-                            <Image src={item.image} alt={imageNameToAltTag(item.image)} height={670} width={2000} onClick={() => SiderClick(item)}/>
+                            <Image src={item.image} alt={imageNameToAltTag(item.image)} height={ screen.width<679 ? 220 : 642} width={screen.width} onClick={() => sliderClick(item)}/>
                             <div className="slidercaption">
                                 {
                                         item.title.length>0 && 

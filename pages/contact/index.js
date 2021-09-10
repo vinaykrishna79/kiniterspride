@@ -36,6 +36,15 @@ class StoreLocator extends Component {
         //     this.props.history.push("/NotFound")
         // }
         this.getCountries()
+        const r = this.props.router;
+        const language  = getCurrentLocaleFromUrl(r.asPath)
+        const contactLangObj = require(`../../public/locales/${language}/common.json`)
+        this.setState({
+            Payload: {
+                ...this.state.Payload,
+                query: contactLangObj.languages.General_Enquiry,
+            },
+        })
         // this.staticMultilingual(this.props.language)
     }
 
@@ -228,7 +237,7 @@ class StoreLocator extends Component {
                                 </div>
                                 <div className="col-sm-12 col-md-5" style={{ display: "flex", "align-items": "center", "justify-content": "center" }}>
                                     <div className="contactmail">
-                                        <Image src={"/images/emailicon.png"} alt="email icon" />
+                                        <Image src={"/images/emailicon.png"} alt="email icon" noSkeleton={true} />
                                         <p className="mob-mb-0">
                                             {/* {t(`languages.Please_write_us_at`)} */}
                                             {contactLangObj.languages.Please_write_us_at}
@@ -351,7 +360,7 @@ class StoreLocator extends Component {
                                                 {contactLangObj.languages.Enter_captcha_code}
                                                 </label>
                                             <Recaptcha
-                                                sitekey={'6Ldhne0aAAAAAI8wvoj3L3d2Byg_CzqOBqQimewT'}
+                                                sitekey={process.env.React_App_site_key}
                                                 render="explicit"
                                                 onloadCallback={this.captchaLoad}
                                                 verifyCallback={this.verify}
@@ -377,21 +386,21 @@ class StoreLocator extends Component {
                                         </h3>
                                     <span>
                                         <a href="https://www.facebook.com/KnittersPride/" target="_blank" rel="noreferrer">
-                                            <Image src={"/images/socialicon1.png"} alt="Facebook" />
+                                            <Image src={"/images/socialicon1.png"} alt="Facebook" noSkeleton={true} />
                                         </a>
                                         <a href="https://www.instagram.com/knitterspride/" target="_blank" rel="noreferrer">
-                                            <Image src={"/images/socialicon2.png"} alt="Instagram" />
+                                            <Image src={"/images/socialicon2.png"} alt="Instagram" noSkeleton={true} />
                                         </a>
                                         <a href="https://www.ravelry.com/groups/knitters-pride" target="_blank" rel="noreferrer">
-                                            <Image src={"/images/socialicon5.png"} alt="Ravelry" />
+                                            <Image src={"/images/socialicon5.png"} alt="Ravelry" noSkeleton={true}/>
                                         </a>
                                         <a href="https://www.youtube.com/user/Knitterspride" target="_blank" rel="noreferrer">
-                                            <Image src={"/images/socialicon3.png"} alt="Youtube" />
+                                            <Image src={"/images/socialicon3.png"} alt="Youtube" noSkeleton={true}/>
                                         </a>
                                         {/* <a href="#"><img src={require('../../Assets/img/socialicon4.png')} /></a> */}
 
                                         <a href={`/blog/${'en'}`} target="_blank" rel="noreferrer">
-                                            <Image src={"/images/socialicon6.png"} alt="Blog | Knitter's Pride"/>
+                                            <Image src={"/images/socialicon6.png"} alt="Blog | Knitter's Pride" noSkeleton={true} />
                                         </a>
                                     </span>
                                 </div>

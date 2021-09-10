@@ -40,7 +40,6 @@ function BrandLogoSlider(props) {
 
                 {props.assets.map((item, idx) => (
                     <div className="item" key={idx}>
-                        {console.log("item1",item)}
                         <div className="barandlogoiner" 
                         // onClick={
                         //     () => router.push({ 
