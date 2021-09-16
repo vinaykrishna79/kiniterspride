@@ -1,5 +1,4 @@
 import Document, { Html, Head, Main, NextScript } from 'next/document';
-
 class MyDocument extends Document {
   static async getInitialProps(ctx) {
     const initialProps = await Document.getInitialProps(ctx)
@@ -9,11 +8,11 @@ class MyDocument extends Document {
   render() {
     return (
       <Html>
-      <Head/>
-   <CustomScripts/>
-        <body>    
+        <Head />
+        <CustomScripts />
+        <body>
           <Main />
-          <NextScript/>
+          <NextScript />
         </body>
       </Html>
     )
@@ -22,13 +21,13 @@ class MyDocument extends Document {
 
 export default MyDocument
 
-const CustomScripts=()=>{
-  return(
+const CustomScripts = () => {
+  return (
     <>
-      <head 
-      dangerouslySetInnerHTML={{ 
-          __html: 
-                  `<meta name="author" content="www.knitterspride.com">
+      <head
+        dangerouslySetInnerHTML={{
+          __html:
+            `<meta name="author" content="www.knitterspride.com">
                   <meta name="page-topic" content="Knitter's Pride Needles">
                   <meta name="copyright" content="Knitter's Pride">
                   <meta name="robots" content="index, follow">
@@ -42,26 +41,35 @@ const CustomScripts=()=>{
                   <meta name="expires" content="never">
                   <meta name="language" content="english">
                   <!-- Global site tag (gtag.js) - Google Analytics -->
+                  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-24920181-1"></script>
+                  <script>
+                    window.dataLayer = window.dataLayer || [];
+                    function gtag(){dataLayer.push(arguments);}
+                    gtag('js', new Date());
+
+                    gtag('config', 'UA-24920181-1');
+                  </script>                  
                   
                 
                   <link rel="manifest" href="favicon/manifest.json" />
+                  <link rel="alternate" type="application/rss+xml" href="/rss.xml" />
+                  <link rel="alternate" type="application/atom+xml" href="/atom.xml" />
+                  <link rel="alternate" type="application/json" href="/feed.json" />
                 
                   <meta name="msapplication-TileColor" content="#ffffff" />
                 
                   <meta name="msapplication-TileImage" content="/ms-icon-144x144.png" />
                 
                   <meta name="theme-color" content="#ffffff" />`+
-                  '<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />'+
-                  '<link rel="stylesheet" href="https://knitterspride-prod.s3.amazonaws.com/testImage/homeCss.css" />'+
-                  '<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>'+
-                  '<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>'+
-                  '<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>'+
-                  '<script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>'+
-                  '<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>'+
-                  '<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>'+
-                  '<script src="https://knitpro-prod.s3.amazonaws.com/testImage/homeJs.js"></script>'+
-                  '<script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/1.3.8/FileSaver.js"></script>'+
-                  `<script src="https://www.google.com/recaptcha/api.js?onload=onloadCallback&render=explicit" async defer></script>
+            '<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />' +
+            '<link rel="stylesheet" href="https://knitterspride-prod.s3.amazonaws.com/testImage/homeCss.css" />' + 
+            '<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>' +
+            '<script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>' +
+            '<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>' +
+            '<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>' +
+            '<script src="https://knitpro-prod.s3.amazonaws.com/testImage/homeJs.js"></script>' +
+            '<script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/1.3.8/FileSaver.js"></script>' +
+            `<script src="https://www.google.com/recaptcha/api.js?onload=onloadCallback&render=explicit" async defer></script>
                   <meta name="google-site-verification" content="XeIeHd7_y1mcgXEPseq8T9MmcPMZWBlWUbgJkGvpMAA" />
                 <script type="text/javascript">
                   var isMegaMenuLoaded = false;
@@ -418,8 +426,9 @@ const CustomScripts=()=>{
                           section.className = 'section--purple wow fadeInUp';
                           this.parentNode.insertBefore(section, this);
                         };
-                      </script>`
-         }} />   
+                      </script>
+          `
+        }} />
     </>
   )
 }

@@ -14,3 +14,11 @@ a {
 * {
   box-sizing: border-box;
 }
+
+
+/* iframe store locator */
+
+.sets-container #faqmain iframe {
+  width: 100%;
+  border: 0;
+}

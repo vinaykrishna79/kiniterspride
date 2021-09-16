@@ -331,7 +331,7 @@ class Ginger extends Component {
                                                           <div className="productColumn wow fadeInUp text-center" key={index}>
                                                             <Link
                                                                     href={{
-                                                                        pathname: `/d/${producttype.slug}/${producttype.pslug}`,
+                                                                        pathname: `/d/${producttype.slug}/${producttype.pslug}/${language}`,
                                                                     }}
                                                                     as={`/d/${producttype.slug}/${producttype.pslug}/${language}`}
                                                                     passHref={true}
@@ -415,9 +415,10 @@ class Ginger extends Component {
                                                                                   pathname: `/e/${types.slug}/${producttype.pslug}`,
                                                                               }}
                                                                               as={`/e/${types.slug}/${producttype.pslug}/${language}`}
-                                                                          >
+                                                                          ><a>
                                                                               {/* {t("languages.View_Details")} */}
                                                                               {gingerLangObj.languages.View_Details}
+                                                                              </a>
                                                                           </Link>
                                                                       </div>
                                                               </div>
@@ -429,8 +430,9 @@ class Ginger extends Component {
                                                                           pathname: `/e/${types.slug}/${producttype.pslug}`,
                                                                       }}
                                                                       as={`/e/${types.slug}/${producttype.pslug}/${language}`}
-                                                                  >
+                                                                  ><a>
                                                                       {producttype.name}
+                                                                    </a>
                                                                   </Link>
                                                                   {producttype?.pname?.length > 0 ? <span>{producttype.pname}</span> : null}
                                                               </p>

@@ -817,12 +817,12 @@ class Header extends Component {
                                                             {headerLangObj.languages.aboutus}
                                                             </Link>
                                                     </li>
-                                                    {/* <li><Link 
+                                                    <li><Link 
                                                     // to="/blog"
                                                     href={`/blog`}
                                                     as={`/blog/${language}`}
                                                     >
-                                                        Blog</Link></li>  */}
+                                                        Blog</Link></li> 
                                                     <li>
                                                         <Link 
                                                         // to={`/social-contribution/${this.props.language}`}

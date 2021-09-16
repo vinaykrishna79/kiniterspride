@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react"
+import React, { useState } from "react"
 import Skeleton from "react-loading-skeleton"
 
 let i = 0
@@ -9,10 +9,6 @@ const CustomImage = ({ src, alt, className, height, width, onClick, noSkeleton})
     const onLoad = () => {
         setLoading(false)
     }
-
-    useEffect(()=>{
-        setLoading(true)
-    },[src])
     
     return (
         <>

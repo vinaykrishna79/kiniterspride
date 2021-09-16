@@ -5,6 +5,8 @@ import { getAPI } from '../../utils/api';
 import MetaDecorator from '../../utils/MetaDecorator';
 import { getCurrentLocaleFromUrl } from '../../utils/helperFunctions';
 import LoadingSkeleton from '../../component/LoadingSkeleton';
+import IframeStoreLoactor from './iframeStoreLocator';
+import CustomImage from '../../component/custom-image';
 // import Footer from '../Footer/Footer'
 // import bg_img_o from '../../Assets/img/distributor-banner.png'
 // import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
@@ -119,7 +121,27 @@ class StoreLocator extends Component {
                                 ogDescription={this.state.ogDescription}
                                 ogImage={this.state.ogImage}
                             />
-                            <div className="sets-container" dangerouslySetInnerHTML={{ __html: topBanner[0].title }} />
+                            <section className="inner-banner kp-mid_banner">
+
+                         <CustomImage id="#top-banner" src="https://knitpro-prod.s3.amazonaws.com/static/distributor-banner.png" alt="" />
+                            </section>
+                            <section id="faqmain">
+                                <div className="container">
+                                    <div className="row">
+                                        <div className="col-xs-12 col-sm-12">
+                                            <h1 style={{ textAlign: 'center' }}>YOUR LOCAL YARN STORE</h1>
+                                            <IframeStoreLoactor />
+
+
+                                        
+                                            <div className="sets-container" dangerouslySetInnerHTML={{ __html: topBanner[0].title }} />
+                                        </div>
+                                    </div>
+                                </div>
+                            </section>
+                            {/* <IframeStoreLoactor/> */}
+
+                            {/* <iframe id="storeL" className="d-none u-77-show" src="http://18.208.41.11/storelocator/index.html" title="store locator" width="100%"></iframe> */}
                             {/* <Footer allLanguage={this.props.allLanguage} langObj={langObj} /> */}
                         </>
                 }

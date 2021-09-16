@@ -53,41 +53,43 @@ class eProductDetail extends React.Component {
 }
 
 export async function getStaticPaths() {
-  let paths = [];
-    const res1 = await fetch(`${Baseurl}type/slugs`);
-    const data1 = await res1.json();
-    const typeData = data1.data;
+    // let paths = [];
+    // const res1 = await fetch(`${Baseurl}type/slugs`);
+    // const data1 = await res1.json();
+    // const typeData = data1.data;
 
-    const res2 = await fetch(`${Baseurl}product/slugs`);
-    const data2 = await res2.json();
-    const productData = data2.data;
+    // const res2 = await fetch(`${Baseurl}product/slugs`);
+    // const data2 = await res2.json();
+    // const productData = data2.data;
 
-    for (let lang in typeData) {
-      for (let typeslug of typeData[lang]) {
-        if(!typeslug.hasBrand){
-          for (let productslug of productData[lang]) {
-            if(lang === "en" || lang === "es"){
-              paths.push(`/e/${typeslug.slug}/${productslug.slug}/${lang}`);
-            }
+    // for (let lang in typeData) {
+    //   for (let typeslug of typeData[lang]) {
+    //     if(!typeslug.hasBrand){
+    //       for (let productslug of productData[lang]) {
+    //         if(lang === "en" || lang === "es"){
+    //           paths.push(`/e/${typeslug.slug}/${productslug.slug}/${lang}`);
+    //         }
             
-          }
-        }
-      }
-    }
-    // console.log(paths);
+    //       }
+    //     }
+    //   }
+    // }
+
+  let paths = [];
+  const res = await fetch(`${Baseurl}pagePaths/productDetail/e`)
+  const data = await res.json()
+  const pathArray = data.data
+  for(let index in pathArray){
+    
+    const pathsForLang = Object.values(pathArray[index])[0] // getting paths for each language 
+    paths.push(...pathsForLang)
+  }
+
+
     return {
         paths,
         fallback: false
     }
-  // return {
-  //   paths: [
-  //     // String variant:
-  //     "/e/first-post/second-post",
-  //     // Object variant:
-  //     //  { params: { slug: 'second-post' } },
-  //   ],
-  //   fallback: true,
-  // };
 }
 
 // export async function getStaticProps({ locale }) {
