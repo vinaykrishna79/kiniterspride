@@ -69,6 +69,7 @@ const CustomScripts = () => {
             '<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>' +
             '<script src="https://knitpro-prod.s3.amazonaws.com/testImage/homeJs.js"></script>' +
             '<script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/1.3.8/FileSaver.js"></script>' +
+            '<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>' +
             `<script src="https://www.google.com/recaptcha/api.js?onload=onloadCallback&render=explicit" async defer></script>
                   <meta name="google-site-verification" content="XeIeHd7_y1mcgXEPseq8T9MmcPMZWBlWUbgJkGvpMAA" />
                 <script type="text/javascript">
@@ -286,7 +287,6 @@ const CustomScripts = () => {
 
                   </script>
 
-                  <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
                     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
                     <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
                   <script>
