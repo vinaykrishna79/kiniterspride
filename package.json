@@ -42,7 +42,10 @@
     "react-select": "^4.3.1",
     "react-store-locator": "^0.20.7",
     "screen-size-detector": "^1.0.4",
-    "store-locator": "^1.0.9"
+    "imagemin-mozjpeg": "^8.0.0",
+    "imagemin-optipng": "^6.0.0",
+    "next-optimized-images": "^2.4.1",
+    "webp-loader": "^0.4.0"
   },
   "devDependencies": {
     "eslint": "7.31.0",

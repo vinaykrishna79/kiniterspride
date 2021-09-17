@@ -1,8 +1,12 @@
 // const { i18n } = require('./next-i18next.config')
 // const webpack = require('webpack');
 require('dotenv').config()
-const withImages = require('next-images')
-module.exports = withImages({
+
+const withPlugins = require('next-compose-plugins');
+const optimizedImages = require('next-optimized-images'); 
+module.exports = withPlugins([
+  optimizedImages,
+  {
   reactStrictMode: true,
   // i18n,
   images: {
@@ -94,4 +98,4 @@ module.exports = withImages({
         },
       ]
     },
-})
+}])
