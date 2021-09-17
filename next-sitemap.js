@@ -21,7 +21,8 @@ const staticPaths = [
   "/sustainability",
   "/terms",
   "/weblink",
-  "/whatsnew"
+  "/whatsnew",
+  "/resourcesinner"
 ]
 
 module.exports = {
