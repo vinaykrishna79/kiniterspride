@@ -26,7 +26,7 @@ const getAllArticles = async () => {
   return paths;
 };
 
-const hostUrl = "https://knitterspride.com";
+const hostUrl = "https://www.knitterspride.com";
 
 const buildFeed = (items) => {
   //   console.log("items", items);
