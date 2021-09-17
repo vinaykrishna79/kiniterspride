@@ -640,12 +640,12 @@ class Home extends React.Component {
 }
 
 // export default withTranslation()(withRouter(Home));
-export async function getStaticProps  ({ locale }){
-    return {
-      props: {
-        ...await serverSideTranslations(locale, ['common']),
-      },
-    }
-  }
+// export async function getStaticProps  ({ locale }){
+//     return {
+//       props: {
+//         ...await serverSideTranslations(locale, ['common']),
+//       },
+//     }
+//   }
 
 export default withRouter(Home)

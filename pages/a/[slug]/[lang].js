@@ -112,43 +112,44 @@ class ProductList extends React.Component {
 }
 
 export async function getStaticPaths() {
-    let paths = []
+    // let paths = []
 
-        const res2 = await fetch(`${Baseurl}brand/slugs`)
-        const data2 = await res2.json()
-        const brandData = data2.data
+    //     const res2 = await fetch(`${Baseurl}brand/slugs`)
+    //     const data2 = await res2.json()
+    //     const brandData = data2.data
 
-        const res3 = await fetch(`${Baseurl}category/slugs`)
-        const data3 = await res3.json()
-        const catData = data3.data
+    //     const res3 = await fetch(`${Baseurl}category/slugs`)
+    //     const data3 = await res3.json()
+    //     const catData = data3.data
 
-        for(let lang in catData){
-            for(let catslug of catData[lang]){
-                for(let brandslug of brandData[lang]){
-                    if(lang === "en" || lang === "es"){
-                    if((catslug.slug).trim() === "needles" || (catslug.slug).trim() === "stricken" || (catslug.slug).trim() === "aguja" || (catslug.slug).trim() === "针头" || (catslug.slug).trim() === "Спица-ne"){
-                        paths.push(`/a/${brandslug.slug}/${lang}`)
-                    }else{
-                        paths.push(`/a/${brandslug.slug}-${catslug.slug}/${lang}`);
-                    }
-                }
-                }
+    //     for(let lang in catData){
+    //         for(let catslug of catData[lang]){
+    //             for(let brandslug of brandData[lang]){
+    //                 if(lang === "en" || lang === "es"){
+    //                 if((catslug.slug).trim() === "needles" || (catslug.slug).trim() === "stricken" || (catslug.slug).trim() === "aguja" || (catslug.slug).trim() === "针头" || (catslug.slug).trim() === "Спица-ne"){
+    //                     paths.push(`/a/${brandslug.slug}/${lang}`)
+    //                 }else{
+    //                     paths.push(`/a/${brandslug.slug}-${catslug.slug}/${lang}`);
+    //                 }
+    //             }
+    //             }
                 
-            }
-        }
-        return {
-            paths,
-            fallback: false
-        }
-    // return {
-    //   paths: [
-    //     // String variant:
-    //     '/a/first-post',
-    //     // Object variant:
-    //      { params: { slug: 'second-post' } },
-    //   ],
-    //   fallback: true,
-    // }
+    //         }
+    //     }
+    let paths = [];
+    const res = await fetch(`${Baseurl}pagePaths/brandDetail/a`)
+    const data = await res.json()
+    const pathArray = data.data
+    for(let index in pathArray){
+      
+      const pathsForLang = Object.values(pathArray[index])[0] // getting paths for each language 
+      paths.push(...pathsForLang)
+    }
+
+    return {
+        paths,
+        fallback: false
+    }
 }
 
 // export async function getStaticProps ({ locale }) {

@@ -112,38 +112,40 @@ class ProductList extends React.Component {
 }
 
 export async function getStaticPaths() {
-    let paths = []
-        const res3 = await fetch(`${Baseurl}category/slugs`)
-        const data3 = await res3.json()
-        const catData = data3.data
+    // let paths = []
+    //     const res3 = await fetch(`${Baseurl}category/slugs`)
+    //     const data3 = await res3.json()
+    //     const catData = data3.data
 
-        const res4 = await fetch(`${Baseurl}material/slugs`)
-        const data4 = await res4.json()
-        const materialData = data4.data
+    //     const res4 = await fetch(`${Baseurl}material/slugs`)
+    //     const data4 = await res4.json()
+    //     const materialData = data4.data
 
-        for(let lang in catData){
-            for(let catslug of catData[lang]){
-                for(let materialslug of materialData[lang]){
-                    if(lang === "en" || lang === "es"){
-                        paths.push(`/c/${materialslug.slug}-${catslug.slug}/${lang}`);
-                    }
-                }
-            }
+    //     for(let lang in catData){
+    //         for(let catslug of catData[lang]){
+    //             for(let materialslug of materialData[lang]){
+    //                 if(lang === "en" || lang === "es"){
+    //                     paths.push(`/c/${materialslug.slug}-${catslug.slug}/${lang}`);
+    //                 }
+    //             }
+    //         }
             
-        }
-        return {
-            paths,
-            fallback: false
-        }
-    // return {
-    //   paths: [
-    //     // String variant:
-    //     '/c/first-post',
-    //     // Object variant:
-    //      { params: { slug: 'second-post' } },
-    //   ],
-    //   fallback: true,
-    // }
+    //     }
+
+    let paths = [];
+    const res = await fetch(`${Baseurl}pagePaths/materialDetail/c`)
+    const data = await res.json()
+    const pathArray = data.data
+    for(let index in pathArray){
+      
+      const pathsForLang = Object.values(pathArray[index])[0] // getting paths for each language 
+      paths.push(...pathsForLang)
+    }
+
+    return {
+        paths,
+        fallback: false
+    }
   }
 
 //   export async function getStaticProps ({ locale }) {
