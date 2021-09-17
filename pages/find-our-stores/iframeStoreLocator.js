@@ -22,7 +22,7 @@ const IframeStoreLoactor=() => {
         log
         // onMessage={onMessage}
         // onResized={onResized}
-        src="http://18.208.41.11/storelocator/index.html"
+        src="https://www.knitterspride.com/storelocator/index.html"
         style={{ width: '100%',border:0, maxHeight:955}}
       />
      {/* <div>{messageData}</div> */}
