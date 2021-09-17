@@ -5,7 +5,7 @@ import { getAPI } from '../../utils/api';
 import MetaDecorator from '../../utils/MetaDecorator';
 import { getCurrentLocaleFromUrl } from '../../utils/helperFunctions';
 import LoadingSkeleton from '../../component/LoadingSkeleton';
-import IframeStoreLoactor from '../../component/IframeStoreLoactor';
+import IframeStoreLoactor from '../../component/iframeStoreLocator';
 import CustomImage from '../../component/custom-image';
 // import Footer from '../Footer/Footer'
 // import bg_img_o from '../../Assets/img/distributor-banner.png'
