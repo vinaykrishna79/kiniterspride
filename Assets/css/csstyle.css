@@ -1173,3 +1173,7 @@ span.Similar-Products-list img {
     padding-top: 0!important;
 }
 /* .mapa>div>div>div:first-child {display: none;} */
+
+.searchresult.search-img {
+    overflow: hidden;
+}
