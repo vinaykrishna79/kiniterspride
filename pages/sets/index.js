@@ -4,8 +4,9 @@ import { getAPI } from "../../utils/api";
 import { withRouter } from "next/router";
 // import { withTranslation } from "react-i18next";
 import MetaDecorator from "../../utils/MetaDecorator";
-import { getCurrentLocaleFromUrl } from "../../utils/helperFunctions";
+import { getCurrentLocaleFromUrl, projectLanguages } from "../../utils/helperFunctions";
 import LoadingSkeleton from "../../component/LoadingSkeleton";
+import { Baseurl } from "../../utils/BaseUrl";
 // import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 
 class Knitting_Crochet_Sets extends Component {
@@ -19,7 +20,7 @@ class Knitting_Crochet_Sets extends Component {
     };
 
     componentDidMount() {
-        // window.scrollTo(0, 0);
+        // window.scrollTo(0, 0); 
         // // const { language } = this.props;
         // let lang = this.props.i18n.language
         const r = this.props.router;
@@ -148,25 +149,31 @@ class Knitting_Crochet_Sets extends Component {
 
     render() {
         const { templateData, keywords, description, isLoading } = this.state;
+        const {allTemplates} = this.props
+        const r = this.props.router;
+        const lang = getCurrentLocaleFromUrl(r.asPath, r.locales, r.defaultLocale)
+
+        const data = allTemplates.filter(temp => Object.keys(temp)[0] === lang)[0]
+        const pageData = data[lang]
         return (
             <React.Fragment>
                 {
-                    isLoading
-                    ?
-                    <LoadingSkeleton />
-                    :
+                    // isLoading
+                    // ?
+                    // <LoadingSkeleton />
+                    // :
                     <>
-                        <MetaDecorator
-                            title={this.state.seoTitle.innerText ? this.state.seoTitle.innerText : ""}
-                            description={description}
-                            keywords={keywords}
-                            ogTitle={this.state.ogTitle}
-                            ogDescription={this.state.ogDescription}
-                            ogImage={this.state.ogImage}
-                        />
+                       <MetaDecorator
+                        title={pageData?.ogFields?.ogTitle  ?  pageData?.ogFields?.ogTitle : ""}
+                        description={pageData?.ogFields?.ogDescription  ? pageData?.ogFields?.ogDescription : ""}
+                        // keywords={keywords}
+                        ogTitle={pageData?.ogFields?.ogTitle  ?  pageData?.ogFields?.ogTitle : ""}
+                        ogDescription={pageData?.ogFields?.ogDescription  ? pageData?.ogFields?.ogDescription : ""}
+                        ogImage={pageData?.ogFields?.ogImage  ? pageData?.ogFields?.ogImage : ""}
+                    />
                         {templateData.length > 0 ? (
                             <>
-                                <div className="sets-container" dangerouslySetInnerHTML={{ __html: templateData[0].title }} />
+                            <div className="sets-container" dangerouslySetInnerHTML={{ __html:  pageData.templateData[0].title }} />
                                 {/* <Footer allLanguage={this.props.allLanguage} /> */}
                             </>
                         ) : null}
@@ -177,6 +184,33 @@ class Knitting_Crochet_Sets extends Component {
         );
     }
 }
+
+export async function getStaticProps() {
+
+    
+    //   const languageRes = await fetch (`${Baseurl}language/language?lang=en`)
+    //   const languageData = await languageRes.json()
+    //   const allLanguage = languageData.data
+    const getPageProps = async (lang) => {
+        const res = await fetch(`${Baseurl}template/getMenuTemplates/14?lang=${lang}`)
+        const data = await res.json()
+        const templateArray = data.data
+        console.log(templateArray);
+        const template = (templateArray.filter(temp => temp.type === 'topBanner'))[0]
+        return ({ [lang]: template })
+    }
+        
+    
+    return {
+        props: {
+            allTemplates: [
+                await getPageProps(projectLanguages[0]),
+                await getPageProps(projectLanguages[1])
+            ]
+        }
+    };
+}
+
 
 // export default withRouter(withTranslation()(Knitting_Crochet_Sets));
 

@@ -32,4 +32,6 @@ export const getAsPathfromUrl = urlArray => {
         return { ...url, from: newFrom, to: newTo }
     })
     return asPathArray  
-} 
+}
+
+export const projectLanguages = ["en", "es"] 

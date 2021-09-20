@@ -1,11 +1,11 @@
 import React, { Component } from 'react'
 // import Footer from './Footer/Footer';
 import { postAPI, postFile, getAPI } from '../../utils/api';
-import { storageUrl } from '../../utils/BaseUrl';
+import { Baseurl, storageUrl } from '../../utils/BaseUrl';
 import { withRouter } from 'next/router';
 // import { withTranslation } from 'react-i18next';
 import MetaDecorator from '../../utils/MetaDecorator';
-import { getCurrentLocaleFromUrl } from '../../utils/helperFunctions';
+import { getCurrentLocaleFromUrl, projectLanguages } from '../../utils/helperFunctions';
 // import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 
 class Replacementpolicy extends Component {
@@ -322,6 +322,11 @@ class Replacementpolicy extends Component {
         const { contactPayload, productToggle, productTogglehook, contactPayloadError, templateData, langObj } = this.state
         // const { t } = this.props
         const r = this.props.router;
+        const {allTemplates} = this.props
+        const lang = getCurrentLocaleFromUrl(r.asPath, r.locales, r.defaultLocale)
+
+        const data = allTemplates.filter(temp => Object.keys(temp)[0] === lang)[0]
+        const pageData = data[lang]
         const language  = getCurrentLocaleFromUrl(r.asPath, r.locales, r.defaultLocale)
         const replacementPolicyLangObj = require(`../../public/locales/${language}/common.json`)
         const err_msg_box = {
@@ -359,14 +364,14 @@ class Replacementpolicy extends Component {
 
         return (
             <React.Fragment>
-                <MetaDecorator
-                    title="Product Replacement | Knitter's Pride"
-                    description="All Knitter’s Pride products are guaranteed for one year from the date of purchase against any manufacturing defect."
-                    keywords=""
-                    ogTitle="Product Replacement | Knitter's Pride"
-                    ogDescription="All Knitter’s Pride products are guaranteed for one year from the date of purchase against any manufacturing defect."
-                    ogImage={""}
-                />
+                                      <MetaDecorator
+                        title={pageData?.ogFields?.ogTitle  ?  pageData?.ogFields?.ogTitle : ""}
+                        description={pageData?.ogFields?.ogDescription  ? pageData?.ogFields?.ogDescription : ""}
+                        // keywords={keywords}
+                        ogTitle={pageData?.ogFields?.ogTitle  ?  pageData?.ogFields?.ogTitle : ""}
+                        ogDescription={pageData?.ogFields?.ogDescription  ? pageData?.ogFields?.ogDescription : ""}
+                        ogImage={pageData?.ogFields?.ogImage  ? pageData?.ogFields?.ogImage : ""}
+                    />
                 {/* <div className="sm_modile_alert" style={card_center_msg}>
                     
                      {
@@ -390,7 +395,7 @@ class Replacementpolicy extends Component {
                                 {
                                     templateData.length > 0
                                         ?
-                                        <div className="sets-container texts-left" dangerouslySetInnerHTML={{ __html: templateData[0].header }} />
+                                        <div className="sets-container" dangerouslySetInnerHTML={{ __html:  pageData.templateData[0].title }} />
                                         :
                                         null
                                 }
@@ -696,6 +701,33 @@ class Replacementpolicy extends Component {
             </React.Fragment>
         )
     }
+}
+
+
+export async function getStaticProps() {
+
+    
+    //   const languageRes = await fetch (`${Baseurl}language/language?lang=en`)
+    //   const languageData = await languageRes.json()
+    //   const allLanguage = languageData.data
+    const getPageProps = async (lang) => {
+        const res = await fetch(`${Baseurl}template/getMenuTemplates/16?lang=${lang}`)
+        const data = await res.json()
+        const templateArray = data.data
+        console.log(templateArray);
+        const template = (templateArray.filter(temp => temp.type === 'topBanner'))[0]
+        return ({ [lang]: template })
+    }
+        
+    
+    return {
+        props: {
+            allTemplates: [
+                await getPageProps(projectLanguages[0]),
+                await getPageProps(projectLanguages[1])
+            ]
+        }
+    };
 }
 
 // export default withRouter(withTranslation()(Replacementpolicy))
