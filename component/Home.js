@@ -96,13 +96,13 @@ class Home extends React.Component {
         this.getLanguages()
 
         //getting promo images
-        promoBannerDetail
-        if (promoBannerDetail.type === "0") {
+        
+        if (promoBannerDetail?.type === "0") {
             this.setState({ promoBannerDetail: promoBannerDetail }, () => {
                 this.setState({ initialModal: true })
             }
                 );
-        } else if (promoBannerDetail.type === "1") {
+        } else if (promoBannerDetail?.type === "1") {
             this.setState({ newsletterModal: true, promoBannerDetail: promoBannerDetail }, () => {
                 if (this.state.allLanguages.length > 0) {
                     let languages = this.state.allLanguages.map((lang, index) => {
@@ -225,12 +225,12 @@ class Home extends React.Component {
         this.setState({ bestSeller: bestSeller });
 
         // getting promo banner detail
-        if (promoBannerDetail.type === "0") {
+        if (promoBannerDetail?.type === "0") {
             this.setState({ promoBannerDetail: promoBannerDetail }, () => {
                 this.setState({ initialModal: true })
             }
                 );
-        } else if (promoBannerDetail.type === "1") {
+        } else if (promoBannerDetail?.type === "1") {
             this.setState({ newsletterModal: true, promoBannerDetail: promoBannerDetail }, () => {
                 if (this.state.allLanguages.length > 0) {
                     let languages = this.state.allLanguages.map((lang, index) => {
@@ -649,7 +649,7 @@ class Home extends React.Component {
                                 </button>
                                 <div className="modal-body">
                                     <div className="bg-img-model ">
-                                        <a href={promoBannerDetail.link} className="d-block">
+                                        <a href={promoBannerDetail?.link} className="d-block">
                                             {promoBannerDetail?.type === "0" ? (
                                                 <div className="Onloading-img">
                                                     <Image src={promoBannerDetail.image} alt={imageNameToAltTag(promoBannerDetail.image)} height={100} width={100}/>
@@ -683,7 +683,7 @@ class Home extends React.Component {
                                 <div className="modal-body">
                                     <div className="news-bg-img ">
                                         <div className="img-fluid">
-                                        <Image src={promoBannerDetail.image} alt={imageNameToAltTag(promoBannerDetail.image)} height={100} width={100}/>
+                                        <Image src={promoBannerDetail?.image} alt={imageNameToAltTag(promoBannerDetail?.image)} height={100} width={100}/>
                                         </div>
                                         <div className="lewsletterform">
                                             <h3 className="letter-title text-center">{promoBannerDetail?.content.title}</h3>
