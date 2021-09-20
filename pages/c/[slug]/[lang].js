@@ -26,7 +26,16 @@ class ProductList extends React.Component {
         // for mobile view header close
         document.getElementById("navbarclose").click();   
     }
-
+    async componentDidUpdate(prevProps) {
+        if (this.props.router.asPath !== prevProps.router.asPath) {
+            this.setState({
+                materials: this.props.data,
+                brands: {},
+                types: {},
+                isLoader: false,
+            });
+        }
+    }
     // connectHeaderGinger = async (unique, categoryid, subcategid, langId) => {
         // let ids = {
         //     categId: categoryid,

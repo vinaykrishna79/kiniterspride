@@ -14,101 +14,111 @@ class ProductList extends React.Component {
         materials: {},
         ids: {},
         isLoader: true,
-    }    
+    }
 
-    async componentDidMount(){
+    async componentDidMount() {
         this.setState({
             brands: this.props.data,
             materials: {},
             types: {},
             isLoader: false,
         });
-        
+
         // for mobile view header close
         document.getElementById("navbarclose").click();
     }
 
+    async componentDidUpdate(prevProps) {
+        if (this.props.router.asPath !== prevProps.router.asPath) {
+            this.setState({
+                brands: this.props.data,
+                materials: {},
+                types: {},
+                isLoader: false,
+            });
+        }
+    }
 
     // connectHeaderGinger = async (unique, categoryid, subcategid, langId) => {
-        // let ids = {
-        //     categId: categoryid,
-        //     subcategId: subcategid,
-        // };
-        // this.setState({ ids })
-        // // this.setState({ isLoader: true });
-        // if (unique === "brand") {
-        //     await getAPI(`brand/brandProductTypes?bslug=${ids.subcategId}&cslug=${ids.categId}&lang=${langId}`)
-        //         .then(async (res) => {
-        //             const { status, data } = res.data;
-        //             // console.log("brand res  ", res);
-        //             if (status === 1) {
-        //                 console.log("data find------", data)
-        //                 await this.setState({
-        //                     brands: data,
-        //                     types: {},
-        //                     materials: {},
-        //                     isLoader: false,
-        //                 });
-        //             }
-        //         })
-        //         .catch((err) => {
-        //             // createBrowserHistory().push("/NotFound");
-        //             // window.location.reload();
-        //         });
-        // } else if (unique === "type") {
-        //     getAPI(`brand/brandshavingType?tslug=${ids.subcategId}&lang=${langId}`)
-        //         .then((res) => {
-        //             const { status, data } = res.data;
-        //             // console.log("type res  ", res);
-        //             if (status === 1) {
-        //                 console.log("data------", data)
-        //                 this.setState({
-        //                     types: data,
-        //                     brands: {},
-        //                     materials: {},
-        //                     isLoader: false,
-        //                 });
-        //             }
-        //         })
-        //         .catch((err) => {
-        //             // createBrowserHistory().push("/NotFound");
-        //             // window.location.reload();
-        //         });
-        // } else if (unique === "material") {
-        //     getAPI(`brand/brandshavingMaterial?mslug=${ids.subcategId}&cslug=${ids.categId}&lang=${langId}`)
-        //         .then((res) => {
-        //             const { status, data } = res.data;
-        //             // console.log("material res   ", res);
-        //             if (status === 1) {
-        //                 console.log("data------", data)
-        //                 this.setState({
-        //                     materials: data,
-        //                     brands: {},
-        //                     types: {},
-        //                     isLoader: false,
-        //                 });
-        //             }
-        //         })
-        //         .catch((err) => {
-        //             // createBrowserHistory().push("/NotFound");
-        //             // window.location.reload();
-        //         });
-        // }
+    // let ids = {
+    //     categId: categoryid,
+    //     subcategId: subcategid,
+    // };
+    // this.setState({ ids })
+    // // this.setState({ isLoader: true });
+    // if (unique === "brand") {
+    //     await getAPI(`brand/brandProductTypes?bslug=${ids.subcategId}&cslug=${ids.categId}&lang=${langId}`)
+    //         .then(async (res) => {
+    //             const { status, data } = res.data;
+    //             // console.log("brand res  ", res);
+    //             if (status === 1) {
+    //                 console.log("data find------", data)
+    //                 await this.setState({
+    //                     brands: data,
+    //                     types: {},
+    //                     materials: {},
+    //                     isLoader: false,
+    //                 });
+    //             }
+    //         })
+    //         .catch((err) => {
+    //             // createBrowserHistory().push("/NotFound");
+    //             // window.location.reload();
+    //         });
+    // } else if (unique === "type") {
+    //     getAPI(`brand/brandshavingType?tslug=${ids.subcategId}&lang=${langId}`)
+    //         .then((res) => {
+    //             const { status, data } = res.data;
+    //             // console.log("type res  ", res);
+    //             if (status === 1) {
+    //                 console.log("data------", data)
+    //                 this.setState({
+    //                     types: data,
+    //                     brands: {},
+    //                     materials: {},
+    //                     isLoader: false,
+    //                 });
+    //             }
+    //         })
+    //         .catch((err) => {
+    //             // createBrowserHistory().push("/NotFound");
+    //             // window.location.reload();
+    //         });
+    // } else if (unique === "material") {
+    //     getAPI(`brand/brandshavingMaterial?mslug=${ids.subcategId}&cslug=${ids.categId}&lang=${langId}`)
+    //         .then((res) => {
+    //             const { status, data } = res.data;
+    //             // console.log("material res   ", res);
+    //             if (status === 1) {
+    //                 console.log("data------", data)
+    //                 this.setState({
+    //                     materials: data,
+    //                     brands: {},
+    //                     types: {},
+    //                     isLoader: false,
+    //                 });
+    //             }
+    //         })
+    //         .catch((err) => {
+    //             // createBrowserHistory().push("/NotFound");
+    //             // window.location.reload();
+    //         });
+    // }
 
-        // console.log("data-------1", this.props.data)
-        // this.setState({
-        //     brands: this.props.data,
-        //     materials: {},
-        //     types: {},
-        //     isLoader: false,
-        // });
-        // // for mobile view header close
-        // document.getElementById("navbarclose").click();
+    // console.log("data-------1", this.props.data)
+    // this.setState({
+    //     brands: this.props.data,
+    //     materials: {},
+    //     types: {},
+    //     isLoader: false,
+    // });
+    // // for mobile view header close
+    // document.getElementById("navbarclose").click();
     // };
 
-    render(){
-        const {seoFields} = this.props
-        return(
+    render() {
+        const { seoFields } = this.props
+        return (
             <>
                 <MetaDecorator
                     title={seoFields?.seoTitle ? seoFields?.seoTitle : ""}
@@ -152,17 +162,17 @@ export async function getStaticPaths() {
     //                 }
     //             }
     //             }
-                
+
     //         }
     //     }
     let paths = [];
     const res = await fetch(`${Baseurl}pagePaths/brandDetail/a`)
     const data = await res.json()
     const pathArray = data.data
-    for(let index in pathArray){
-      
-      const pathsForLang = Object.values(pathArray[index])[0] // getting paths for each language 
-      paths.push(...pathsForLang)
+    for (let index in pathArray) {
+
+        const pathsForLang = Object.values(pathArray[index])[0] // getting paths for each language 
+        paths.push(...pathsForLang)
     }
 
     return {
@@ -179,12 +189,12 @@ export async function getStaticPaths() {
 //       }
 //   }
 
-export async function getStaticProps({ params: {slug, lang} }) {
+export async function getStaticProps({ params: { slug, lang } }) {
     let res
-    if(slug.includes("-sets")){
-        res = await fetch(`${Baseurl}brand/brandProductTypes?bslug=${slug.replace("-sets","")}&cslug=${"sets"}&lang=${lang}`)
-    } else if(slug.includes("-crochet")){
-        res = await fetch(`${Baseurl}brand/brandProductTypes?bslug=${slug.replace("-crochet","")}&cslug=${"crochet"}&lang=${lang}`)
+    if (slug.includes("-sets")) {
+        res = await fetch(`${Baseurl}brand/brandProductTypes?bslug=${slug.replace("-sets", "")}&cslug=${"sets"}&lang=${lang}`)
+    } else if (slug.includes("-crochet")) {
+        res = await fetch(`${Baseurl}brand/brandProductTypes?bslug=${slug.replace("-crochet", "")}&cslug=${"crochet"}&lang=${lang}`)
     } else {
         res = await fetch(`${Baseurl}brand/brandProductTypes?bslug=${slug}&cslug=${"needles"}&lang=${lang}`)
     }
@@ -192,11 +202,11 @@ export async function getStaticProps({ params: {slug, lang} }) {
     const resData = data.data
     const seoFields = resData?.seoFields
     return {
-      props: {
-        seoFields: seoFields ? seoFields : null,
-        data: resData
-      }
+        props: {
+            seoFields: seoFields ? seoFields : null,
+            data: resData
+        }
     };
 }
-  
+
 export default withRouter(ProductList)

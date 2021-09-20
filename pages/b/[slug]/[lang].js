@@ -46,6 +46,16 @@ class ProductList extends React.Component {
     document.getElementById("navbarclose").click();
   }
 
+  async componentDidUpdate(prevProps) {
+    if (this.props.router.asPath !== prevProps.router.asPath) {
+      this.setState({
+        types: this.props.data,
+        brands: {},
+        materials: {},
+        isLoader: false,
+      });
+    }
+}
   // connectHeaderGinger = async (unique, categoryid, subcategid, langId) => {
     // let ids = {
     //   categId: categoryid,
