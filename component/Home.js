@@ -77,85 +77,189 @@ class Home extends React.Component {
         }
     }
 
+    loadData = () => {
+        const { allData, bestSeller, allLanguages, promoBannerDetail} = this.props
+
+        //getting templates
+        this.setState({
+            templates: allData,
+            featureBanner2: allData.filter((value) => value.type === "feature_banner2"),
+            featureBanner4: allData.filter((value) => value.type === "feature_banner4"),
+            featureBanner5: allData.filter((value) => value.type === "feature_banner5"),
+            socialBanner: allData.filter((value) => value.type === "socialBanner"),
+        });
+
+        //getting bestSellers
+        this.setState({ bestSeller: bestSeller })
+
+        //getting all languages
+        this.getLanguages()
+
+        //getting promo images
+        promoBannerDetail
+        if (promoBannerDetail.type === "0") {
+            this.setState({ promoBannerDetail: promoBannerDetail }, () => {
+                this.setState({ initialModal: true })
+            }
+                );
+        } else if (promoBannerDetail.type === "1") {
+            this.setState({ newsletterModal: true, promoBannerDetail: promoBannerDetail }, () => {
+                if (this.state.allLanguages.length > 0) {
+                    let languages = this.state.allLanguages.map((lang, index) => {
+                        return {
+                            label: lang["name"],
+                            value: lang["shortName"],
+                        };
+                    });
+                    this.setState({ languages: languages }, () => {
+                        // let currentLang = localStorage.getItem('KP-web-lang')
+                        let currentLang = language;
+                        if (currentLang) {
+                            if (this.state.languages.length > 0) {
+                                let langFilter = this.state.languages.filter((short) => short.value === currentLang);
+                                if (langFilter.length > 0) {
+                                    this.setState({ language: langFilter[0] });
+                                }
+                            }
+                        }
+                    });
+                }
+            });
+        }
+
+    }
+
+    // loadData = () => {
+    //     const { language } = this.state;
+    //     // const wow = new WOW.WOW();
+    //     // wow.init();
+  
+    //     getAPI(`template/getMenuTemplates/1?lang=${language}`)
+    //         .then((res) => {
+    //             // console.log(res, language);
+    //             const allData = res.data.data;
+    //             this.setState({
+    //                 isLoading: false,
+    //                 templates: allData,
+    //                 featureBanner2: allData.filter((value) => value.type === "feature_banner2"),
+    //                 featureBanner4: allData.filter((value) => value.type === "feature_banner4"),
+    //                 featureBanner5: allData.filter((value) => value.type === "feature_banner5"),
+    //                 socialBanner: allData.filter((value) => value.type === "socialBanner"),
+    //             });
+    //         })
+    //         .catch((err) => console.log(err));
+
+    //     // getting bestseller product
+
+    //     getAPI(`product/bestSeller?lang=${language}`)
+    //         .then((res) => {
+    //             let { data, status } = res.data;
+    //             console.log("allData--", data)
+    //             if (status === 1) {
+    //                 this.setState({ bestSeller: data });
+    //             }
+    //         })
+    //         .catch((err) => console.log(err));
+
+    //     // promo banner image and link
+
+    //     getAPI(`promoImage/promoImage/${language}`)
+    //         .then((res) => {
+    //             let { data, status } = res.data;
+    //             if (status === 1) {
+    //                 this.getLanguages();
+    //                 if (data.type === "0") {
+    //                     this.setState({ promoBannerDetail: data }, () => {
+    //                         this.setState({ initialModal: true })
+    //                     }
+    //                         );
+    //                 } else if (data.type === "1") {
+    //                     this.setState({ newsletterModal: true, promoBannerDetail: data }, () => {
+    //                         if (this.state.allLanguages.length > 0) {
+    //                             let languages = this.state.allLanguages.map((lang, index) => {
+    //                                 return {
+    //                                     label: lang["name"],
+    //                                     value: lang["shortName"],
+    //                                 };
+    //                             });
+    //                             this.setState({ languages: languages }, () => {
+    //                                 // let currentLang = localStorage.getItem('KP-web-lang')
+    //                                 let currentLang = language;
+    //                                 if (currentLang) {
+    //                                     if (this.state.languages.length > 0) {
+    //                                         let langFilter = this.state.languages.filter((short) => short.value === currentLang);
+    //                                         if (langFilter.length > 0) {
+    //                                             this.setState({ language: langFilter[0] });
+    //                                         }
+    //                                     }
+    //                                 }
+    //                             });
+    //                         }
+    //                     });
+    //                 }
+    //             } else {
+    //                 this.setState({ initialModal: false });
+    //             }
+    //         })
+    //         .catch((err) => console.log(err));
+    // };
 
     loadData = () => {
         const { language } = this.state;
-        // const wow = new WOW.WOW();
-        // wow.init();
-  
-        getAPI(`template/getMenuTemplates/1?lang=${language}`)
-            .then((res) => {
-                // console.log(res, language);
-                const allData = res.data.data;
-                this.setState({
-                    isLoading: false,
-                    templates: allData,
-                    featureBanner2: allData.filter((value) => value.type === "feature_banner2"),
-                    featureBanner4: allData.filter((value) => value.type === "feature_banner4"),
-                    featureBanner5: allData.filter((value) => value.type === "feature_banner5"),
-                    socialBanner: allData.filter((value) => value.type === "socialBanner"),
-                });
-            })
-            .catch((err) => console.log(err));
+        const { allData, bestSeller, allLanguages, promoBannerDetail} = this.props
+
+        // getting all Languages
+        this.getLanguages()
+
+        // getting templte data
+        this.setState({
+            isLoading: false,
+            templates: allData,
+            featureBanner2: allData.filter((value) => value.type === "feature_banner2"),
+            featureBanner4: allData.filter((value) => value.type === "feature_banner4"),
+            featureBanner5: allData.filter((value) => value.type === "feature_banner5"),
+            socialBanner: allData.filter((value) => value.type === "socialBanner"),
+        })
 
         // getting bestseller product
+        this.setState({ bestSeller: bestSeller });
 
-        getAPI(`product/bestSeller?lang=${language}`)
-            .then((res) => {
-                let { data, status } = res.data;
-                if (status === 1) {
-                    this.setState({ bestSeller: data });
-                }
-            })
-            .catch((err) => console.log(err));
-
-        // promo banner image and link
-
-        getAPI(`promoImage/promoImage/${language}`)
-            .then((res) => {
-                let { data, status } = res.data;
-                if (status === 1) {
-                    this.getLanguages();
-                    if (data.type === "0") {
-                        this.setState({ promoBannerDetail: data }, () => {
-                            this.setState({ initialModal: true })
-                        }
-                            );
-                    } else if (data.type === "1") {
-                        this.setState({ newsletterModal: true, promoBannerDetail: data }, () => {
-                            if (this.state.allLanguages.length > 0) {
-                                let languages = this.state.allLanguages.map((lang, index) => {
-                                    return {
-                                        label: lang["name"],
-                                        value: lang["shortName"],
-                                    };
-                                });
-                                this.setState({ languages: languages }, () => {
-                                    // let currentLang = localStorage.getItem('KP-web-lang')
-                                    let currentLang = language;
-                                    if (currentLang) {
-                                        if (this.state.languages.length > 0) {
-                                            let langFilter = this.state.languages.filter((short) => short.value === currentLang);
-                                            if (langFilter.length > 0) {
-                                                this.setState({ language: langFilter[0] });
-                                            }
-                                        }
-                                    }
-                                });
+        // getting promo banner detail
+        if (promoBannerDetail.type === "0") {
+            this.setState({ promoBannerDetail: promoBannerDetail }, () => {
+                this.setState({ initialModal: true })
+            }
+                );
+        } else if (promoBannerDetail.type === "1") {
+            this.setState({ newsletterModal: true, promoBannerDetail: promoBannerDetail }, () => {
+                if (this.state.allLanguages.length > 0) {
+                    let languages = this.state.allLanguages.map((lang, index) => {
+                        return {
+                            label: lang["name"],
+                            value: lang["shortName"],
+                        };
+                    });
+                    this.setState({ languages: languages }, () => {
+                        // let currentLang = localStorage.getItem('KP-web-lang')
+                        let currentLang = language;
+                        if (currentLang) {
+                            if (this.state.languages.length > 0) {
+                                let langFilter = this.state.languages.filter((short) => short.value === currentLang);
+                                if (langFilter.length > 0) {
+                                    this.setState({ language: langFilter[0] });
+                                }
                             }
-                        });
-                    }
-                } else {
-                    this.setState({ initialModal: false });
+                        }
+                    });
                 }
-            })
-            .catch((err) => console.log(err));
+            });
+        }
     };
 
     getLanguages = () => {
-        getAPI(`language/language?lang=en`)
-            .then((res) => {
-                this.setState({ allLanguage: res.data.data }, () => {
+        // getAPI(`language/language?lang=en`)
+        //     .then((res) => {
+                this.setState({ allLanguage: this.props.allLanguages }, () => {
                     let languages = this.state.allLanguage.map((lang, index) => {
                         return {
                             label: lang["name"],
@@ -178,8 +282,8 @@ class Home extends React.Component {
                         // }
                     });
                 });
-            })
-            .catch((err) => console.log("Header lang error: ", err));
+            // })
+            // .catch((err) => console.log("Header lang error: ", err));
     };
 
     getAllLanguages = (allLanguages) => {

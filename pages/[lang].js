@@ -31,19 +31,48 @@ export default function Home(props) {
       ogImage={ogFields?.ogImage ? ogFields?.ogImage : ""}
     />
     <div>
-      <HomePage />
+      <HomePage 
+        {...props}
+      />
     </div>
     </>
   )
 }
 
-export async function getStaticProps({ }) {
+export async function getStaticProps({ params: {lang} }) {
   let res = await fetch(`${Baseurl}template/homepageOgFields`)
   const data = await res.json();
   const { ogFields } = data.data
+
+  const languageRes = await fetch (`${Baseurl}language/language?lang=${lang}`)
+  const languageData = await languageRes.json()
+  const allLanguages = languageData.data
+
+  const instaFeedRes = await fetch(`${Baseurl}template/instaposts`)
+  const instaFeedData = await instaFeedRes.json()
+  const instaFeed = instaFeedData.data
+
+  const templateRes = await fetch(`${Baseurl}template/getMenuTemplates/1?lang=${lang}`)
+  const templateData = await templateRes.json()
+  const allData = templateData.data
+
+  const productRes = await fetch(`${Baseurl}product/bestSeller?lang=${lang}`)
+  const productData = await productRes.json()
+  const bestSeller = productData.data
+
+  const promoImageRes = await fetch(`${Baseurl}promoImage/promoImage/${lang}`)
+  const promoImageData = await promoImageRes.json()
+  const promoBannerDetail = promoImageData.data
+
+
   return {
     props: {
-      ogFields: ogFields
+      ogFields: ogFields,
+      allLanguages: allLanguages,
+      instaFeed: instaFeed,
+      allData: allData,
+      bestSeller: bestSeller,
+      promoBannerDetail: promoBannerDetail
     }
   };
 }
@@ -53,7 +82,6 @@ export async function getStaticPaths() {
     projectLanguages.map(lang => {
         paths.push(`/${lang}`)
     })
-    console.log(paths)
     
     return {
         paths,
