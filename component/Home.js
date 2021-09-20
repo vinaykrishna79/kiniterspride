@@ -409,9 +409,9 @@ class Home extends React.Component {
         const homeLangObj = require(`../public/locales/${language}/common.json`)
 
         return (
-        isLoading ? (
-            <LoadingSkeleton />
-        ) : (
+        // isLoading ? (
+        //     <LoadingSkeleton />
+        // ) : (
             <React.Fragment>
                 {/* <MetaDecorator 
                     title={t("languages.title")} 
@@ -650,7 +650,7 @@ class Home extends React.Component {
                                 <div className="modal-body">
                                     <div className="bg-img-model ">
                                         <a href={promoBannerDetail.link} className="d-block">
-                                            {promoBannerDetail.type === "0" ? (
+                                            {promoBannerDetail?.type === "0" ? (
                                                 <div className="Onloading-img">
                                                     <Image src={promoBannerDetail.image} alt={imageNameToAltTag(promoBannerDetail.image)} height={100} width={100}/>
                                                 </div>
@@ -739,7 +739,7 @@ class Home extends React.Component {
                 {/* =============================Newsletter modal close================================= */}
             </React.Fragment>
         )
-        )
+        // )
     }
 }
 
