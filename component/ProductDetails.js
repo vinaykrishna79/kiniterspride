@@ -145,6 +145,28 @@ class ProductDetails extends React.Component {
 //     }
 //   }
 
+  componentDidUpdate(prevProps) { 
+   
+    if(this.props.router.asPath !== prevProps.router.asPath){
+      // console.log('1ddd',this.props.router.asPath, prevProps.router.asPath)
+      this.setState({loader:true})
+    document.addEventListener("mousedown", this.handleClickOutside); 
+    const r = this.props.router;
+    const language  = getCurrentLocaleFromUrl(r.asPath, r.locales, r.defaultLocale) 
+    let { productSlug, brandSlug } = this.props.router.query
+    this.setState({ lang_i: language }, () => {
+      this.getCategories()
+    });
+ 
+      if(r.asPath.includes("/d/")) {
+        this.getProductLists( brandSlug, productSlug, language );
+      } else {
+        this.getSearchedProductDetails(productSlug, language)
+      }
+   
+    this.getCountries();
+  }
+  }
   componentDidMount() {
     // window.scrollTo(0, 0);
     // let langus = localStorage.getItem("languages")
@@ -183,7 +205,6 @@ class ProductDetails extends React.Component {
     // }
     this.getCountries();
   }
-
   getCategories = () => {
     
     const url = "category/categories/" + this.state.lang_i;
