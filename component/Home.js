@@ -276,7 +276,7 @@ class Home extends React.Component {
             });
     };
     render() {
-        const { isLoading, templates, featureBanner2, /*featureBanner4,*/ featureBanner5, socialBanner, instaFeeds, promoBannerDetail, initialModal, screen } = this.state;
+        const { isLoading, templates, featureBanner2, /*featureBanner4,*/ allLanguages, featureBanner5, socialBanner, instaFeeds, promoBannerDetail, initialModal, screen } = this.state;
         // const { initialModal, t } = this.props;
         // console.log("allLanguage   ", this.props)
         // const { /*languages, langObj,*/  allLanguages } = this.state;
