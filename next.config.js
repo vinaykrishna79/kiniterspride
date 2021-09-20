@@ -98,4 +98,149 @@ module.exports = withPlugins([
         },
       ]
     },
+    async redirects() {
+      return [
+        {
+          source: '/',
+          destination: '/en',
+          permanent: true
+        },
+        {
+          source: '/about-us',
+          destination: '/about-us/en',
+          permanent: true
+        },
+        {
+          source: '/bags-cases',
+          destination: '/bags-cases/en',
+          permanent: true
+        },
+        {
+          source: '/blog',
+          destination: '/blog/en',
+          permanent: true
+        },
+        {
+          source: '/contact',
+          destination: '/contact/en',
+          permanent: true
+        },
+        {
+          source: '/crochet',
+          destination: '/crochet/en',
+          permanent: true
+        },
+        {
+          source: '/faq',
+          destination: '/faq/en',
+          permanent: true
+        },
+        {
+          source: '/find-our-stores',
+          destination: '/find-our-stores/en',
+          permanent: true
+        },
+        {
+          source: '/infrastructure',
+          destination: '/infrastructure/en',
+          permanent: true
+        },
+        {
+          source: '/knitting-accessories',
+          destination: '/knitting-accessories/en',
+          permanent: true
+        },
+        {
+          source: '/knitting-needles',
+          destination: '/knitting-needles/en',
+          permanent: true
+        },
+        {
+          source: '/newsletter',
+          destination: '/newsletter/en',
+          permanent: true
+        },
+        {
+          source: '/our-people',
+          destination: '/our-people/en',
+          permanent: true
+        },
+        {
+          source: '/privacy-policy',
+          destination: '/privacy-policy/en',
+          permanent: true
+        },
+        {
+          source: '/product-catalog',
+          destination: '/product-catalog/en',
+          permanent: true
+        },
+        {
+          source: '/replacementpolicy',
+          destination: '/replacementpolicy/en',
+          permanent: true
+        },
+        {
+          source: '/resourcesinner',
+          destination: '/resourcesinner/en',
+          permanent: true
+        },
+        {
+          source: '/resources',
+          destination: '/resources/en',
+          permanent: true
+        },
+        {
+          source: '/sets',
+          destination: '/sets/en',
+          permanent: true
+        },
+        {
+          source: '/social-contribution',
+          destination: '/social-contribution/en',
+          permanent: true
+        },
+        {
+          source: '/sustainability',
+          destination: '/sustainability/en',
+          permanent: true
+        },
+        {
+          source: '/terms',
+          destination: '/terms/en',
+          permanent: true
+        },
+        {
+          source: '/whatsnew',
+          destination: '/whatsnew/en',
+          permanent: true
+        },
+        //dynamic pages
+        {
+          source: '/a/:slug',
+          destination: '/a/:slug/en',
+          permanent: true
+        },
+        {
+          source: '/b/:slug',
+          destination: '/b/:slug/en',
+          permanent: true
+        },
+        {
+          source: '/c/:slug',
+          destination: '/c/:slug/en',
+          permanent: true
+        },
+        {
+          source: '/d/:brandSlug/:productSlug',
+          destination: '/d/:brandSlug/:productSlug/en',
+          permanent: true
+        },
+        {
+          source: '/e/:typeSlug/:productSlug',
+          destination: '/e/:typeSlug/:productSlug/en',
+          permanent: true
+        },
+      ]
+    },
 }])

@@ -46,105 +46,105 @@ class Ginger extends Component {
     // }
 
     componentDidMount() {
-        this.getDataForTheComponent()
+        // this.getDataForTheComponent()
         this.setState({screen: new ScreenSizeDetector()})
     }
 
     componentDidUpdate(prevProps, prevState) {
         if(prevProps.router.asPath !== this.props.router.asPath){
-            this.getDataForTheComponent()
+            // this.getDataForTheComponent()
         }
     }
 
-    getDataForTheComponent = () => {
-        this.setState({loading: true})
-        let ids = this.props.router.query;
-        // let { language } = this.props.i18n
-        const r = this.props.router;
-        ids.lang = getCurrentLocaleFromUrl(r.asPath, r.locales, r.defaultLocale);
-        ids.pagetype = this.props.id 
-        this.setState({ ids: ids }, () => {
-            let { ids } = this.state;
-            if (ids.pagetype === "a") {
-                this.getCategories();
-            } else if (ids.pagetype === "b") {
-                // let lang_i = this.props.i18n.language.split('-')[0]
-                this.props.connectHeaderGinger("type", null, ids.slug, ids.lang);
-            } else if (ids.pagetype === "c") {
-                this.getCategories();
-            }
-        });
-        this.setState({loading: false})
-    }
+    // getDataForTheComponent = () => {
+    //     this.setState({loading: true})
+    //     let ids = this.props.router.query;
+    //     // let { language } = this.props.i18n
+    //     const r = this.props.router;
+    //     ids.lang = getCurrentLocaleFromUrl(r.asPath, r.locales, r.defaultLocale);
+    //     ids.pagetype = this.props.id 
+    //     this.setState({ ids: ids }, () => {
+    //         let { ids } = this.state;
+    //         if (ids.pagetype === "a") {
+    //             this.getCategories();
+    //         } else if (ids.pagetype === "b") {
+    //             // let lang_i = this.props.i18n.language.split('-')[0]
+    //             this.props.connectHeaderGinger("type", null, ids.slug, ids.lang);
+    //         } else if (ids.pagetype === "c") {
+    //             this.getCategories();
+    //         }
+    //     });
+    //     this.setState({loading: false})
+    // }
 
     
 
-    getCategories = () => {
-        const url = "category/categories/" + this.state.ids.lang
-        // const url = "category/categories/" + this.state.ids.lang;
-        getAPI(url).then((res) => {
-            const { status, data } = res.data;
-            if (status === 1) {
-                let catNeedleName = data[0].slug
-                this.setState(
-                    {
-                        categories: data,
-                        lang_i: this.state.ids.lang,
-                    },
-                    () => {
-                        this.splitcateg(this.state.ids.slug, catNeedleName)
-                    }
-                );
-            } else {
-                this.setState({ categories: [] });
-            }
-        });
-    };
+    // getCategories = () => {
+    //     const url = "category/categories/" + this.state.ids.lang
+    //     // const url = "category/categories/" + this.state.ids.lang;
+    //     getAPI(url).then((res) => {
+    //         const { status, data } = res.data;
+    //         if (status === 1) {
+    //             let catNeedleName = data[0].slug
+    //             this.setState(
+    //                 {
+    //                     categories: data,
+    //                     lang_i: this.state.ids.lang,
+    //                 },
+    //                 () => {
+    //                     this.splitcateg(this.state.ids.slug, catNeedleName)
+    //                 }
+    //             );
+    //         } else {
+    //             this.setState({ categories: [] });
+    //         }
+    //     });
+    // };
 
-    splitcateg = async (idssubcateg, catNeedleName) => {
-        let splt = idssubcateg.split("-");
-        let obj;
-        if (splt.length > 1) {
-            let lastindex = idssubcateg.lastIndexOf("-");
-            let lastsubstr = idssubcateg.substr(lastindex + 1);
-            let findInd = this.state.categories.findIndex((item) => item.slug === lastsubstr);
-            if (findInd === -1) {
-                obj = {
-                    categ: catNeedleName,
-                    subcateg: idssubcateg,
-                };
-            } else {
-                obj = {
-                    categ: lastsubstr,
-                    subcateg: idssubcateg.substr(0, lastindex),
-                };
-            }
-            await this.setState({ splitCategObj: obj }, () => {
-                let { splitCategObj, ids } = this.state;
-                if (ids?.pagetype === "a") {
-                    if(splt[1] === catNeedleName) {
-                        this.props.router.push("/NotFound")
-                    }
-                    this.props.connectHeaderGinger("brand", splitCategObj.categ, splitCategObj.subcateg, this.state.ids.lang);
-                } else if (ids?.pagetype === "c") {
-                    this.props.connectHeaderGinger("material", splitCategObj.categ, splitCategObj.subcateg, this.state.ids.lang);
-                }
-            });
-        } else {
-            obj = {
-                categ: catNeedleName,
-                subcateg: idssubcateg,
-            };
-            this.setState({ splitCategObj: obj }, () => {
-                let { splitCategObj, ids } = this.state;
-                if (ids?.pagetype === "a") {
-                    this.props.connectHeaderGinger("brand", splitCategObj.categ, splitCategObj.subcateg, this.state.ids.lang);
-                } else if (ids?.pagetype === "c") {
-                    this.props.connectHeaderGinger("material", splitCategObj.categ, splitCategObj.subcateg, this.state.ids.lang);
-                }
-            });
-        }
-    };
+    // splitcateg = async (idssubcateg, catNeedleName) => {
+    //     let splt = idssubcateg.split("-");
+    //     let obj;
+    //     if (splt.length > 1) {
+    //         let lastindex = idssubcateg.lastIndexOf("-");
+    //         let lastsubstr = idssubcateg.substr(lastindex + 1);
+    //         let findInd = this.state.categories.findIndex((item) => item.slug === lastsubstr);
+    //         if (findInd === -1) {
+    //             obj = {
+    //                 categ: catNeedleName,
+    //                 subcateg: idssubcateg,
+    //             };
+    //         } else {
+    //             obj = {
+    //                 categ: lastsubstr,
+    //                 subcateg: idssubcateg.substr(0, lastindex),
+    //             };
+    //         }
+    //         await this.setState({ splitCategObj: obj }, () => {
+    //             let { splitCategObj, ids } = this.state;
+    //             if (ids?.pagetype === "a") {
+    //                 if(splt[1] === catNeedleName) {
+    //                     this.props.router.push("/NotFound")
+    //                 }
+    //                 this.props.connectHeaderGinger("brand", splitCategObj.categ, splitCategObj.subcateg, this.state.ids.lang);
+    //             } else if (ids?.pagetype === "c") {
+    //                 this.props.connectHeaderGinger("material", splitCategObj.categ, splitCategObj.subcateg, this.state.ids.lang);
+    //             }
+    //         });
+    //     } else {
+    //         obj = {
+    //             categ: catNeedleName,
+    //             subcateg: idssubcateg,
+    //         };
+    //         this.setState({ splitCategObj: obj }, () => {
+    //             let { splitCategObj, ids } = this.state;
+    //             if (ids?.pagetype === "a") {
+    //                 this.props.connectHeaderGinger("brand", splitCategObj.categ, splitCategObj.subcateg, this.state.ids.lang);
+    //             } else if (ids?.pagetype === "c") {
+    //                 this.props.connectHeaderGinger("material", splitCategObj.categ, splitCategObj.subcateg, this.state.ids.lang);
+    //             }
+    //         });
+    //     }
+    // };
 
     imageOnly = (product) => {
         let imageOnly = [];

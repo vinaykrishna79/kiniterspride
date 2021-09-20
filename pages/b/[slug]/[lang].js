@@ -16,7 +16,7 @@ class ProductList extends React.Component {
     isLoader: true,
   };
 
-  // async componentDidMount() {
+  async componentDidMount() {
     // let paths = [];
     // const res3 = await fetch("https://devapi.knitpro.eu/category/slugs");
     // const data3 = await res3.json();
@@ -34,77 +34,95 @@ class ProductList extends React.Component {
     //   }
     // }
     // console.log(paths);
-  // }
 
-  connectHeaderGinger = async (unique, categoryid, subcategid, langId) => {
-    let ids = {
-      categId: categoryid,
-      subcategId: subcategid,
-    };
-    this.setState({ ids });
-    // this.setState({ isLoader: true });
-    if (unique === "brand") {
-      await getAPI(
-        `brand/brandProductTypes?bslug=${ids.subcategId}&cslug=${ids.categId}&lang=${langId}`
-      )
-        .then(async (res) => {
-          const { status, data } = res.data;
-          // console.log("brand res  ", res);
-          if (status === 1) {
-            await this.setState({
-              brands: data,
-              types: {},
-              materials: {},
-              isLoader: false,
-            });
-          }
-        })
-        .catch((err) => {
-          // createBrowserHistory().push("/NotFound");
-          // window.location.reload();
-        });
-    } else if (unique === "type") {
-      getAPI(`brand/brandshavingType?tslug=${ids.subcategId}&lang=${langId}`)
-        .then((res) => {
-          const { status, data } = res.data;
-          // console.log("type res  ", res);
-          if (status === 1) {
-            this.setState({
-              types: data,
-              brands: {},
-              materials: {},
-              isLoader: false,
-            });
-          }
-        })
-        .catch((err) => {
-          // createBrowserHistory().push("/NotFound");
-          // window.location.reload();
-        });
-    } else if (unique === "material") {
-      getAPI(
-        `brand/brandshavingMaterial?mslug=${ids.subcategId}&cslug=${ids.categId}&lang=${langId}`
-      )
-        .then((res) => {
-          const { status, data } = res.data;
-          // console.log("material res   ", res);
-          if (status === 1) {
-            this.setState({
-              materials: data,
-              brands: {},
-              types: {},
-              isLoader: false,
-            });
-          }
-        })
-        .catch((err) => {
-          // createBrowserHistory().push("/NotFound");
-          // window.location.reload();
-        });
-    }
+    this.setState({
+      types: this.props.data,
+      brands: {},
+      materials: {},
+      isLoader: false,
+    });
+
     // for mobile view header close
     document.getElementById("navbarclose").click();
-  };
+  }
+
+  // connectHeaderGinger = async (unique, categoryid, subcategid, langId) => {
+    // let ids = {
+    //   categId: categoryid,
+    //   subcategId: subcategid,
+    // };
+    // this.setState({ ids });
+    // // this.setState({ isLoader: true });
+    // if (unique === "brand") {
+    //   await getAPI(
+    //     `brand/brandProductTypes?bslug=${ids.subcategId}&cslug=${ids.categId}&lang=${langId}`
+    //   )
+    //     .then(async (res) => {
+    //       const { status, data } = res.data;
+    //       // console.log("brand res  ", res);
+    //       if (status === 1) {
+    //         await this.setState({
+    //           brands: data,
+    //           types: {},
+    //           materials: {},
+    //           isLoader: false,
+    //         });
+    //       }
+    //     })
+    //     .catch((err) => {
+    //       // createBrowserHistory().push("/NotFound");
+    //       // window.location.reload();
+    //     });
+    // } else if (unique === "type") {
+    //   getAPI(`brand/brandshavingType?tslug=${ids.subcategId}&lang=${langId}`)
+    //     .then((res) => {
+    //       const { status, data } = res.data;
+    //       // console.log("type res  ", res);
+    //       if (status === 1) {
+    //         this.setState({
+    //           types: data,
+    //           brands: {},
+    //           materials: {},
+    //           isLoader: false,
+    //         });
+    //       }
+    //     })
+    //     .catch((err) => {
+    //       // createBrowserHistory().push("/NotFound");
+    //       // window.location.reload();
+    //     });
+    // } else if (unique === "material") {
+    //   getAPI(
+    //     `brand/brandshavingMaterial?mslug=${ids.subcategId}&cslug=${ids.categId}&lang=${langId}`
+    //   )
+    //     .then((res) => {
+    //       const { status, data } = res.data;
+    //       // console.log("material res   ", res);
+    //       if (status === 1) {
+    //         this.setState({
+    //           materials: data,
+    //           brands: {},
+    //           types: {},
+    //           isLoader: false,
+    //         });
+    //       }
+    //     })
+    //     .catch((err) => {
+    //       // createBrowserHistory().push("/NotFound");
+    //       // window.location.reload();
+    //     });
+    // }
+
+    // this.setState({
+    //   types: this.props.data,
+    //   brands: {},
+    //   materials: {},
+    //   isLoader: false,
+    // });
+    // // for mobile view header close
+    // document.getElementById("navbarclose").click();
+  // };
+
   render() {
     const {seoFields} = this.props
     return (
@@ -121,7 +139,7 @@ class ProductList extends React.Component {
           {...this.state}
           seoFields={this.props.seoFields}
           id="b"
-          connectHeaderGinger={this.connectHeaderGinger}
+          // connectHeaderGinger={this.connectHeaderGinger}
         />
       </>
     );
@@ -170,7 +188,8 @@ export async function getStaticProps({ params: {slug, lang} }) {
   const seoFields = resData?.seoFields
   return {
     props: {
-      seoFields: seoFields ? seoFields : null
+      seoFields: seoFields ? seoFields : null,
+      data: resData
     }
   };
 }
