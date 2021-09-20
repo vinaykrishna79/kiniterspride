@@ -110,7 +110,7 @@ class Resources extends Component {
                             {/* Main Section End */}
                             <section className="inner position-relative">
                                 <div className="header-overlay" />
-                                <Image src={"/images/resourcesbanner.png"} alt="Resources banner" className=" w-100" width={0} height={0} />
+                                <Image src={"https://knitterspride-prod.s3.amazonaws.com/static/resourcesbanner-knitterspride.jpg"} alt="Resources banner" className=" w-100" width={0} height={0} />
                             </section>
                             <section id="press">
                                 <div className="container">
