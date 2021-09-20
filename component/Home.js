@@ -409,9 +409,9 @@ class Home extends React.Component {
         const homeLangObj = require(`../public/locales/${language}/common.json`)
 
         return (
-        // isLoading ? (
-        //     <LoadingSkeleton />
-        // ) : (
+        isLoading ? (
+            <LoadingSkeleton />
+        ) : (
             <React.Fragment>
                 {/* <MetaDecorator 
                     title={t("languages.title")} 
@@ -739,7 +739,7 @@ class Home extends React.Component {
                 {/* =============================Newsletter modal close================================= */}
             </React.Fragment>
         )
-        // )
+        )
     }
 }
 
