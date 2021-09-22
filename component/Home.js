@@ -398,10 +398,10 @@ class Home extends React.Component {
         }
 
         const card_center_msg =  {
-            position: "absolute",
+            position: "fixed",
             top: "42px",
             left: "50%",
-            zIndex: "9"
+            zIndex: "999999999"
           }
 
         const r = this.props.router;
