@@ -24,33 +24,38 @@ class SingleBlogPage extends Component {
 
   async componentDidMount() {
     window.scrollTo(0, 0);
-    const r = this.props.router;
-    this.setState(
-      {
-        lang_i: getCurrentLocaleFromUrl(r.asPath, r.locales, r.defaultLocale),
-      },
-      () => {
-        // let langus = localStorage.getItem("languages")
-        // if(langus && !langus.includes(this.state.lang_i)){
-        //     this.props.router.push("/NotFound")
-        // }
-        let blogSlug = this.props.router.query;
-        if (blogSlug?.slug) {
-          this.setState({ isLoad: true });
-          getAPI(`blog/blog?bslug=${blogSlug.slug}`)
-            .then((res) => {
-              let { status, data } = res.data;
-              if (status === 1) {
-                this.setState({
-                  blogPost: data,
-                  isLoad: false,
-                });
-              }
-            })
-            .catch((err) => console.log(err));
-        }
-      }
-    );
+    // const r = this.props.router;
+    // this.setState(
+    //   {
+    //     lang_i: getCurrentLocaleFromUrl(r.asPath, r.locales, r.defaultLocale),
+    //   },
+    //   () => {
+    //     // let langus = localStorage.getItem("languages")
+    //     // if(langus && !langus.includes(this.state.lang_i)){
+    //     //     this.props.router.push("/NotFound")
+    //     // }
+    //     let blogSlug = this.props.router.query;
+    //     if (blogSlug?.slug) {
+    //       this.setState({ isLoad: true });
+    //       getAPI(`blog/blog?bslug=${blogSlug.slug}`)
+    //         .then((res) => {
+    //           let { status, data } = res.data;
+    //           console.log(data)
+    //           if (status === 1) {
+    //             this.setState({
+    //               blogPost: data,
+    //               isLoad: false,
+    //             });
+    //           }
+    //         })
+    //         .catch((err) => console.log(err));
+    //     }
+    //   }
+    // );
+
+    this.setState({
+      blogPost: this.props.blog
+    })
   }
 
   // componentDidUpdate(prevProps) {
@@ -85,11 +90,11 @@ class SingleBlogPage extends Component {
           ogImage={ogFields?.ogImage ? ogFields?.ogImage : ""}
           ogUrl={ogFields?.ogUrl ? ogFields?.ogUrl : ""}
       />
-        {
+        {/* {
           isLoad
             ?
             <LoadingSkeleton />
-            :
+            : */}
             <>
               {/* {blogPost.title ? (
                 <MetaDecorator
@@ -105,7 +110,7 @@ class SingleBlogPage extends Component {
                 <div className="blog-container">
                   <div className="container">
                     <div className="row">
-                      {isLoad ? (
+                      {/* {isLoad ? (
                         <div style={{ paddingBottom: "100px" }}>
                           <div style={{ paddingBottom: "20px" }}>
                             <Skeleton count={1} height={50} width={500} />
@@ -120,7 +125,7 @@ class SingleBlogPage extends Component {
                             <Skeleton count={5} height={15} width={800} />
                           </div>
                         </div>
-                      ) : null}
+                      ) : null} */}
                       <div className="col-sm-12 col-md-12">
                         <div className="blogbox">
                           <div className="blog-col">
@@ -180,7 +185,7 @@ class SingleBlogPage extends Component {
               </div>
               {/* <Footer allLanguage={this.props.allLanguage} langObj={langObj} /> */}
             </>
-        }
+        {/* } */}
       </React.Fragment>
     );
   }
@@ -216,7 +221,7 @@ export async function getStaticPaths() {
 }
 
 export async function getStaticProps({params: {slug, lang} }) {
-  const res = await fetch(`${Baseurl}blog/blog?bslug=${slug}`)
+  const res = await fetch(`${Baseurl}blog/blog?bslug=${slug}&lang=${lang}`)
   const data = await res.json();
   const resData = data.data
   const ogFields = {
@@ -226,7 +231,8 @@ export async function getStaticProps({params: {slug, lang} }) {
   }
   return {
     props: {
-      ogFields: ogFields
+      ogFields: ogFields,
+      blog: resData
     }
   };
 }

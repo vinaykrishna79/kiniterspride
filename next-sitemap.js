@@ -1,4 +1,5 @@
 const staticPaths = [
+  "/",
   "/about-us",
   "/bags-cases",
   "/blog",

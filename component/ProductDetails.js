@@ -10,8 +10,8 @@ import ReactHtmlParser from "react-html-parser";
 import moment from "moment";
 import Skeleton from "react-loading-skeleton";
 import Recaptcha from 'react-recaptcha';
-// import ModalVideo from "react-modal-video";
-// import "react-modal-video/scss/modal-video.scss";
+import ModalVideo from "react-modal-video";
+
 import MetaDecorator from "../utils/MetaDecorator";
 import Select from "react-select";
 // import { createBrowserHistory } from "history";
@@ -63,7 +63,8 @@ class ProductDetails extends React.Component {
     ratingMessage: "",
     errorMessage: "",
     successMessage: "",
-    catNeedleName: ""
+    catNeedleName: "",
+    videomodal:false
   };
   wrapperRef = React.createRef();
 
@@ -168,6 +169,7 @@ class ProductDetails extends React.Component {
   }
   }
   componentDidMount() {
+    this.setState({ videomodal:true})
     // window.scrollTo(0, 0);
     // let langus = localStorage.getItem("languages")
     // if(langus && !langus.includes(this.props?.match?.params?.lang)){
@@ -974,7 +976,7 @@ const card_center_msg =  {
                             ) : null}
                           </>
                         ))}
-                      {/* <ModalVideo
+                      {this.state.videomodal ? <ModalVideo
                         channel="youtube"
                         isOpen={this.state.isOpen}
                         videoId={this.state.videoId}
@@ -983,7 +985,7 @@ const card_center_msg =  {
                             isOpen: false,
                           })
                         }
-                      /> */}
+                      /> : null}
                     </ul>
                   </div>
                   <div className="col-md-10 col-sm-10 order-1 order-sm-2 pl-md-0 ">

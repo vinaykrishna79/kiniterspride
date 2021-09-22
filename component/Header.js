@@ -539,10 +539,12 @@ class Header extends Component {
                         <div className="container">
                             <div className="row">
                                 <div className="col-3 padding-0">
-                                    <Link href="/" >
+                                    <Link href={`/${language}`} >
+                                        <a>
                                         <span className="navbar-brand header-logo" style={{"cursor": "pointer"}}>
                                             <Image src={"/images/Knitters_Pride_Logo.png"} alt="Knitter's Pride" noSkeleton={true} />
                                         </span>
+                                        </a>
                                     </Link>
                                 </div>
                                 <div className="col-7 text-right">
@@ -570,10 +572,12 @@ class Header extends Component {
                     <div className="searchmainwrap"></div>
                     <div className="container">
                         <nav className="navbar navbar-expand-lg navbar-light">
-                            <Link href="/" >
+                        <Link href={`/${language}`} >
+                            <a>
                                 <span className="navbar-brand header-logo" style={{"cursor": "pointer"}}>
                                     <Image src={"/images/Knitters_Pride_Logo.png"} alt="Knitter's Pride" height={42} width={120} noSkeleton={true} />
                                 </span>
+                                </a>
                             </Link>
                             <button
                                 className="navbar-toggler"
