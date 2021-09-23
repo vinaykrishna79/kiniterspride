@@ -20,7 +20,7 @@ const CustomImage = ({ src, alt, className, height, width, onClick, noSkeleton})
                 <>
                     {/* <div className="d-none"><img src={src} alt={alt} className={className} onClick={onClick} onLoad={onLoad}/></div> */}
                 
-                        {!loading ? <span className={className} style={{overflow: "hidden"}}><Skeleton height={height} width={width} /></span> : null}
+                        {loading ? <span className={className} style={{overflow: "hidden"}}><Skeleton height={height} width={width} /></span> : null}
                        
                         <img src={src} alt={alt} className={className, loading ? `d-none` : ``} onClick={onClick} onLoad={onLoad}/>
                  
