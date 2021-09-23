@@ -12,7 +12,7 @@ const CustomImage = ({ src, alt, className, height, width, onClick, noSkeleton})
     
     return (
         <>
-            {
+            {/* {
                 noSkeleton
                 ?
                 <img src={src} alt={alt} className={className} onClick={onClick} />
@@ -27,7 +27,7 @@ const CustomImage = ({ src, alt, className, height, width, onClick, noSkeleton})
                         <img src={src} alt={alt} className={className} onClick={onClick}  />
                     }
                 </>   
-            }
+            } */}
             
             
         </> 
