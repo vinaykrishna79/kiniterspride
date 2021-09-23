@@ -61,15 +61,14 @@ const CustomScripts = () => {
                   <meta name="msapplication-TileImage" content="/ms-icon-144x144.png" />
                 
                   <meta name="theme-color" content="#ffffff" />`+
-            '<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />' +
+            '<link rel="stylesheet" href="/Assets/css/font-awesome.min.css" />' +
             '<link rel="stylesheet" href="https://knitterspride-prod.s3.amazonaws.com/testImage/homeCss.css" />' + 
-            '<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>' +
-            '<script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>' +
-            '<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>' +
-            '<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>' +
+            '<script src="/Assets/js/bootstrap.min.js"></script>' +           
+            '<script src="/Assets/js/popper.min.js"></script>' +
             '<script src="https://knitpro-prod.s3.amazonaws.com/testImage/homeJs.js"></script>' +
-            '<script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/1.3.8/FileSaver.js"></script>' +
-            '<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>' +
+            '<script src="/Assets/js/FileSaver.js"></script>' +
+            '<script src="/Assets/js/jquery-3.5.1.min.js"></script>' +
+            '<script src="/Assets/js/owl.carousel.min.js"></script>' + 
             `<script src="https://www.google.com/recaptcha/api.js?onload=onloadCallback&render=explicit" async defer></script>
                   <meta name="google-site-verification" content="XeIeHd7_y1mcgXEPseq8T9MmcPMZWBlWUbgJkGvpMAA" />
                 <script type="text/javascript">
@@ -286,9 +285,7 @@ const CustomScripts = () => {
                     });
 
                   </script>
-
-                    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-                    <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
+  
                   <script>
                   $(document).ready(function () {
                     setTimeout(() => {

@@ -445,7 +445,7 @@ class Home extends React.Component {
 
                 {/* Top Slider */}
                 <section className="homeSlider wow fadeInUp">
-                    {/* <TopSlider templates={templates} language={'language'} /> */}
+                    <TopSlider templates={templates} language={'language'} />
                 </section>
 
                 {/* End Top Slider */}
@@ -455,7 +455,7 @@ class Home extends React.Component {
                     <div className="container">
                         <div className="row">
                             <div className="col-12">
-                                {/* <Secondslider templates={templates} loop={false}/> */}
+                                <Secondslider templates={templates} loop={false}/>
                             </div>
                         </div>
                     </div>
@@ -475,7 +475,7 @@ class Home extends React.Component {
                                         data-wow-offset={300}
                                         style={{ visibility: "visible", animationName: "fadeInUp" }}
                                     >
-                                        {/* {item.image ?  <Image src={item.image} alt={imageNameToAltTag(item.image)} height={screen.width>1199?420 : screen.width>991?332 : screen.width>767?245 : screen.width>678?277: 200} /> : null} */}
+                                        {item.image ?  <Image src={item.image} alt={imageNameToAltTag(item.image)} height={screen.width>1199?420 : screen.width>991?332 : screen.width>767?245 : screen.width>678?277: 200} /> : null}
                                         <div className="caption kpbg-dark mob-text-left">
                                             <h3 className="text-white mob-font-18">{item.title}</h3>
                                             <p className="text-white ">{item.sub}</p>
@@ -500,7 +500,7 @@ class Home extends React.Component {
                         <div className="container">
                             <div className="row">
                                 <div className="col-12">
-                                    {/* <ProductSlider bestSeller={this.state.bestSeller} bestSellerFunc={this.bestSellerFunc} loop={true}/> */}
+                                    <ProductSlider bestSeller={this.state.bestSeller} bestSellerFunc={this.bestSellerFunc} loop={true}/>
                                 </div>
                             </div>
                         </div>
@@ -513,7 +513,7 @@ class Home extends React.Component {
                         <section className="communitySection mt-5 wow fadeInUp" key={idx}>
                             <div className="container">
                                 <div className="inner">
-                                    {/* { item.image ? <Image src={item.image} alt={imageNameToAltTag(item.image)} height={650} width={(screen.width)*0.84}/>  : "" } */}
+                                    { item.image ? <Image src={item.image} alt={imageNameToAltTag(item.image)} height={650} width={(screen.width)*0.84}/>  : "" }
                                     <div className="caption text-center">
                                         <div className="title mob-font-18">{item.title}</div>
                                         <p className="mob-font-14 mob-text-center">{item.sub}</p>
