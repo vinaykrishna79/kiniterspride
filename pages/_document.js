@@ -27,7 +27,8 @@ const CustomScripts = () => {
       <head
         dangerouslySetInnerHTML={{
           __html:
-            `<meta name="author" content="www.knitterspride.com">
+          `<script src="/Assets/js/jquery-3.5.1.min.js"></script>
+            <meta name="author" content="www.knitterspride.com">
                   <meta name="page-topic" content="Knitter's Pride Needles">
                   <meta name="copyright" content="Knitter's Pride">
                   <meta name="robots" content="index, follow">
@@ -68,8 +69,7 @@ const CustomScripts = () => {
             '<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>' +
             '<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>' +
             '<script src="https://knitpro-prod.s3.amazonaws.com/testImage/homeJs.js"></script>' +
-            '<script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/1.3.8/FileSaver.js"></script>' +
-            '<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>' +
+            '<script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/1.3.8/FileSaver.js"></script>' +        
             `<script src="https://www.google.com/recaptcha/api.js?onload=onloadCallback&render=explicit" async defer></script>
                   <meta name="google-site-verification" content="XeIeHd7_y1mcgXEPseq8T9MmcPMZWBlWUbgJkGvpMAA" />
                 <script type="text/javascript">
