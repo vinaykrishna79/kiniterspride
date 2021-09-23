@@ -56,7 +56,7 @@ function TopCarosel(props) {
                         <div
                             className="item"
                             key={`${idx}`}
-                            onClick={() => sliderClick(item)} 
+                            // onClick={() => sliderClick(item)} 
                             style={item.buttonLink.trim().length === 0 ? {} : { cursor: "pointer" }}
                         >
                             {/* {console.log("Item", item)} */}
