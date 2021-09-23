@@ -19,78 +19,78 @@ class Knitting_Crochet_Sets extends Component {
         isLoading: true
     };
 
-    componentDidMount() {
-        // window.scrollTo(0, 0); 
-        // // const { language } = this.props;
-        // let lang = this.props.i18n.language
-        const r = this.props.router;
-        const lang = getCurrentLocaleFromUrl(r.asPath, r.locales, r.defaultLocale)
-        // let langus = localStorage.getItem("languages")
-        // if(langus && !langus.includes(lang)){
-        //     this.props.history.push("/NotFound")
-        // }
-        // let lang = 'en'
-        if (lang) {
-            this.setState(
-                {
-                    language: lang,
-                },
-                () => {
-                    getAPI(`template/getMenuTemplates/14?lang=${this.state.language}`)
-                        .then((res) => {
-                            const { status, data } = res.data;
-                            if (status === 1) {
-                                if (data.length > 0) {
-                                    if (data[0].adminMenuUid === 14 && data[0].type === "topBanner") {
-                                        this.setState(
-                                            {
-                                                templateData: data[0].templateData,
-                                                isLoading: false
-                                            },
-                                            () => {
-                                                let metas = document.getElementsByTagName("title");
-                                                let meta = document.getElementsByTagName("meta");
-                                                for (let i = 0; i < meta.length; i++) {
-                                                    if (meta[i].getAttribute("name") === "keywords") {
-                                                        this.setState({
-                                                            keywords: meta[i].getAttribute("content"),
-                                                        });
-                                                    }
-                                                    if (meta[i].getAttribute("name") === "description") {
-                                                        this.setState({
-                                                            description: meta[i].getAttribute("content"),
-                                                        });
-                                                    }
-                                                    if (meta[i].getAttribute('property') === 'og:title') {
-                                                        this.setState({
-                                                            ogTitle: meta[i].getAttribute('content')
-                                                        })
-                                                    }
-                                                    if (meta[i].getAttribute('property') === 'og:description') {
-                                                        this.setState({
-                                                            ogDescription: meta[i].getAttribute('content')
-                                                        })
-                                                    }
-                                                    if (meta[i].getAttribute('property') === 'og:image') {
-                                                        this.setState({
-                                                            ogImage: meta[i].getAttribute('content')
-                                                        })
-                                                    }
-                                                }
-                                                this.setState({
-                                                    seoTitle: metas[metas.length - 1],
-                                                });
-                                            }
-                                        );
-                                    }
-                                }
-                            }
-                        })
-                        .catch((err) => console.log(err));
-                }
-            );
-        }
-    }
+    // componentDidMount() {
+    //     // window.scrollTo(0, 0); 
+    //     // // const { language } = this.props;
+    //     // let lang = this.props.i18n.language
+    //     const r = this.props.router;
+    //     const lang = getCurrentLocaleFromUrl(r.asPath, r.locales, r.defaultLocale)
+    //     // let langus = localStorage.getItem("languages")
+    //     // if(langus && !langus.includes(lang)){
+    //     //     this.props.history.push("/NotFound")
+    //     // }
+    //     // let lang = 'en'
+    //     if (lang) {
+    //         this.setState(
+    //             {
+    //                 language: lang,
+    //             },
+    //             () => {
+    //                 getAPI(`template/getMenuTemplates/14?lang=${this.state.language}`)
+    //                     .then((res) => {
+    //                         const { status, data } = res.data;
+    //                         if (status === 1) {
+    //                             if (data.length > 0) {
+    //                                 if (data[0].adminMenuUid === 14 && data[0].type === "topBanner") {
+    //                                     this.setState(
+    //                                         {
+    //                                             templateData: data[0].templateData,
+    //                                             isLoading: false
+    //                                         },
+    //                                         () => {
+    //                                             let metas = document.getElementsByTagName("title");
+    //                                             let meta = document.getElementsByTagName("meta");
+    //                                             for (let i = 0; i < meta.length; i++) {
+    //                                                 if (meta[i].getAttribute("name") === "keywords") {
+    //                                                     this.setState({
+    //                                                         keywords: meta[i].getAttribute("content"),
+    //                                                     });
+    //                                                 }
+    //                                                 if (meta[i].getAttribute("name") === "description") {
+    //                                                     this.setState({
+    //                                                         description: meta[i].getAttribute("content"),
+    //                                                     });
+    //                                                 }
+    //                                                 if (meta[i].getAttribute('property') === 'og:title') {
+    //                                                     this.setState({
+    //                                                         ogTitle: meta[i].getAttribute('content')
+    //                                                     })
+    //                                                 }
+    //                                                 if (meta[i].getAttribute('property') === 'og:description') {
+    //                                                     this.setState({
+    //                                                         ogDescription: meta[i].getAttribute('content')
+    //                                                     })
+    //                                                 }
+    //                                                 if (meta[i].getAttribute('property') === 'og:image') {
+    //                                                     this.setState({
+    //                                                         ogImage: meta[i].getAttribute('content')
+    //                                                     })
+    //                                                 }
+    //                                             }
+    //                                             this.setState({
+    //                                                 seoTitle: metas[metas.length - 1],
+    //                                             });
+    //                                         }
+    //                                     );
+    //                                 }
+    //                             }
+    //                         }
+    //                     })
+    //                     .catch((err) => console.log(err));
+    //             }
+    //         );
+    //     }
+    // }
 
     // componentDidUpdate(prevProps) {
     //     if (this.props.i18n.language.split("-")[0] !== prevProps.language && prevProps.language !== "") {
@@ -164,19 +164,14 @@ class Knitting_Crochet_Sets extends Component {
                     // :
                     <>
                        <MetaDecorator
-                        title={pageData?.ogFields?.ogTitle  ?  pageData?.ogFields?.ogTitle : ""}
-                        description={pageData?.ogFields?.ogDescription  ? pageData?.ogFields?.ogDescription : ""}
-                        // keywords={keywords}
-                        ogTitle={pageData?.ogFields?.ogTitle  ?  pageData?.ogFields?.ogTitle : ""}
-                        ogDescription={pageData?.ogFields?.ogDescription  ? pageData?.ogFields?.ogDescription : ""}
-                        ogImage={pageData?.ogFields?.ogImage  ? pageData?.ogFields?.ogImage : ""}
-                    />
-                        {templateData.length > 0 ? (
-                            <>
-                            <div className="sets-container" dangerouslySetInnerHTML={{ __html:  pageData.templateData[0].title }} />
-                                {/* <Footer allLanguage={this.props.allLanguage} /> */}
-                            </>
-                        ) : null}
+                            title={pageData?.ogFields?.ogTitle  ?  pageData?.ogFields?.ogTitle : ""}
+                            description={pageData?.ogFields?.ogDescription  ? pageData?.ogFields?.ogDescription : ""}
+                            // keywords={keywords}
+                            ogTitle={pageData?.ogFields?.ogTitle  ?  pageData?.ogFields?.ogTitle : ""}
+                            ogDescription={pageData?.ogFields?.ogDescription  ? pageData?.ogFields?.ogDescription : ""}
+                            ogImage={pageData?.ogFields?.ogImage  ? pageData?.ogFields?.ogImage : ""}
+                        />
+                        <div className="sets-container" dangerouslySetInnerHTML={{ __html:  pageData.templateData[0].title }} />
                     </>
                 }
 
@@ -195,7 +190,6 @@ export async function getStaticProps() {
         const res = await fetch(`${Baseurl}template/getMenuTemplates/14?lang=${lang}`)
         const data = await res.json()
         const templateArray = data.data
-        console.log(templateArray);
         const template = (templateArray.filter(temp => temp.type === 'topBanner'))[0]
         return ({ [lang]: template })
     }

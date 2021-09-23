@@ -80,41 +80,41 @@ class Replacementpolicy extends Component {
     //     }
     // }
 
-    componentDidMount() {
-        // window.scrollTo(0, 0)
-        // const { language } = this.props;
-        const r = this.props.router;
-        const lang  = getCurrentLocaleFromUrl(r.asPath, r.locales, r.defaultLocale)
-        // let langus = localStorage.getItem("languages")
-        // if(langus && !langus.includes(lang)){
-        //     this.props.history.push("/NotFound")
-        // }
-        // let lang = 'en'
-        if (lang) {
-            this.setState({
-                lang_i: lang
-            }, () => {
-                getAPI(`template/getMenuTemplates/16?lang=${this.state.lang_i}`)
-                    .then(res => {
-                        const { status, data } = res.data
-                        if (status === 1) {
-                            if (data.length > 0) {
-                                if (data[0].adminMenuUid === 16 && data[0].type === "topBanner") {
-                                    this.setState({
-                                        templateData: data[0].templateData
-                                    }, () => {
-                                        let metas = document.getElementsByTagName("title");
-                                        this.setState({
-                                            seoTitle: metas[metas.length - 1]
-                                        })
-                                    })
-                                }
-                            }
-                        }
-                    }).catch(err => console.log(err));
-            })
-        }
-    }
+    // componentDidMount() {
+    //     // window.scrollTo(0, 0)
+    //     // const { language } = this.props;
+    //     const r = this.props.router;
+    //     const lang  = getCurrentLocaleFromUrl(r.asPath, r.locales, r.defaultLocale)
+    //     // let langus = localStorage.getItem("languages")
+    //     // if(langus && !langus.includes(lang)){
+    //     //     this.props.history.push("/NotFound")
+    //     // }
+    //     // let lang = 'en'
+    //     if (lang) {
+    //         this.setState({
+    //             lang_i: lang
+    //         }, () => {
+    //             getAPI(`template/getMenuTemplates/16?lang=${this.state.lang_i}`)
+    //                 .then(res => {
+    //                     const { status, data } = res.data
+    //                     if (status === 1) {
+    //                         if (data.length > 0) {
+    //                             if (data[0].adminMenuUid === 16 && data[0].type === "topBanner") {
+    //                                 this.setState({
+    //                                     templateData: data[0].templateData
+    //                                 }, () => {
+    //                                     let metas = document.getElementsByTagName("title");
+    //                                     this.setState({
+    //                                         seoTitle: metas[metas.length - 1]
+    //                                     })
+    //                                 })
+    //                             }
+    //                         }
+    //                     }
+    //                 }).catch(err => console.log(err));
+    //         })
+    //     }
+    // }
 
 
     validateForm = async () => {
@@ -364,14 +364,14 @@ class Replacementpolicy extends Component {
 
         return (
             <React.Fragment>
-                                      <MetaDecorator
-                        title={pageData?.ogFields?.ogTitle  ?  pageData?.ogFields?.ogTitle : ""}
-                        description={pageData?.ogFields?.ogDescription  ? pageData?.ogFields?.ogDescription : ""}
-                        // keywords={keywords}
-                        ogTitle={pageData?.ogFields?.ogTitle  ?  pageData?.ogFields?.ogTitle : ""}
-                        ogDescription={pageData?.ogFields?.ogDescription  ? pageData?.ogFields?.ogDescription : ""}
-                        ogImage={pageData?.ogFields?.ogImage  ? pageData?.ogFields?.ogImage : ""}
-                    />
+                <MetaDecorator
+                    title={pageData?.ogFields?.ogTitle  ?  pageData?.ogFields?.ogTitle : ""}
+                    description={pageData?.ogFields?.ogDescription  ? pageData?.ogFields?.ogDescription : ""}
+                    // keywords={keywords}
+                    ogTitle={pageData?.ogFields?.ogTitle  ?  pageData?.ogFields?.ogTitle : ""}
+                    ogDescription={pageData?.ogFields?.ogDescription  ? pageData?.ogFields?.ogDescription : ""}
+                    ogImage={pageData?.ogFields?.ogImage  ? pageData?.ogFields?.ogImage : ""}
+                />
                 {/* <div className="sm_modile_alert" style={card_center_msg}>
                     
                      {
@@ -389,17 +389,10 @@ class Replacementpolicy extends Component {
                         <div className="row">
                             <div className="col-sm-12 col-md-12">
                                 <h1 className="text-center">
-                                    {/* {t(`languages.ProductReplacement`)}  */}
-                                    {replacementPolicyLangObj.languages.ProductReplacement}
-                                    </h1>
-                                {
-                                    templateData.length > 0
-                                        ?
-                                        <div className="sets-container" dangerouslySetInnerHTML={{ __html:  pageData.templateData[0].title }} />
-                                        :
-                                        null
-                                }
-                                
+                                {/* {t(`languages.ProductReplacement`)}  */}
+                                {replacementPolicyLangObj.languages.ProductReplacement}
+                                </h1>
+                                <div className="sets-container" dangerouslySetInnerHTML={{ __html:  pageData.templateData[0].header }} />
                             </div>
                             <div className="col-sm-12 col-md-12 mt-90">
                                 <div className="contactformmsin">
@@ -686,13 +679,7 @@ class Replacementpolicy extends Component {
                                     </form>
                                 </div>
                             </div>
-                            {
-                                templateData.length > 0
-                                    ?
-                                    <div className="sets-container  my-30" dangerouslySetInnerHTML={{ __html: templateData[0].footer }} />
-                                    :
-                                    null
-                            }
+                            <div className="sets-container  my-30" dangerouslySetInnerHTML={{ __html: pageData.templateData[0].footer }} />
                             {/* <p style={{ fontSize: '18px', textAlign: 'left', margin: '30px 20px' }}>We are committed to providing products of high quality and performance to all of our customers. Please do write to us at <a href="mailto:support@knitpro.eu">support@knitpro.eu</a>  if you need any additional information regarding any of our product related policies.</p> */}
                         </div>
                     </div>
@@ -714,7 +701,6 @@ export async function getStaticProps() {
         const res = await fetch(`${Baseurl}template/getMenuTemplates/16?lang=${lang}`)
         const data = await res.json()
         const templateArray = data.data
-        console.log(templateArray);
         const template = (templateArray.filter(temp => temp.type === 'topBanner'))[0]
         return ({ [lang]: template })
     }
