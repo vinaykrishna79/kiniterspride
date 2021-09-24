@@ -197,7 +197,9 @@ class Ginger extends Component {
                 /> */}
                 <div className="ginger-container">
                     {isLoader ? (
-                        <LoadingSkeleton />
+                      <div style={{minHeight:'100vh'}}>
+                      <LoadingSkeleton />
+                      </div>
                     ) : 
                     // null}
                     // {

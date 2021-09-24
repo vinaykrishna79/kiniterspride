@@ -410,7 +410,9 @@ class Home extends React.Component {
 
         return (
         isLoading ? (
+            <div style={{minHeight:'100vh'}}>
             <LoadingSkeleton />
+            </div>
         ) : (
             <React.Fragment>
                 {/* <MetaDecorator 

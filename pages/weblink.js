@@ -126,7 +126,9 @@ class Weburl extends Component {
     render() {
         const { topBannerList, isLoading, langObj, keywords, description } = this.state;
         return (
-            isLoading ? <LoadingSkeleton /> :
+            isLoading ?<div style={{minHeight:'100vh'}}>
+            <LoadingSkeleton />
+            </div> :
                 topBannerList.length &&
                 <React.Fragment>
                     <MetaDecorator

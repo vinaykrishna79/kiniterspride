@@ -227,7 +227,9 @@ class Blog extends Component {
                 {
                     isLoad
                         ?
+                        <div style={{minHeight:'100vh'}}>
                         <LoadingSkeleton />
+                        </div>
                         :
                         <>
                             <MetaDecorator

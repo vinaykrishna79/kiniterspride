@@ -103,7 +103,9 @@ class Resources extends Component {
                     ogImage={""}
                 />
                 {isLoading ? (
+                    <div style={{minHeight:'100vh'}}>
                     <LoadingSkeleton />
+                    </div>
                 ) : (
                     <>
                         <div className="sets-container">
